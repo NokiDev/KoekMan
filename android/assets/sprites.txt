@@ -1,0 +1,89 @@
+sprites.png
+size: 821, 122
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ghosts/red/down/0000
+  rotate: false
+  xy: 494, 1
+  size: 80, 50
+  orig: 80, 50
+  offset: 0, 0
+  index: -1
+ghosts/red/down/0001
+  rotate: false
+  xy: 494, 53
+  size: 80, 50
+  orig: 80, 50
+  offset: 0, 0
+  index: -1
+ghosts/red/left/0000
+  rotate: false
+  xy: 576, 1
+  size: 80, 50
+  orig: 80, 50
+  offset: 0, 0
+  index: -1
+ghosts/red/left/0001
+  rotate: false
+  xy: 576, 53
+  size: 80, 50
+  orig: 80, 50
+  offset: 0, 0
+  index: -1
+ghosts/red/right/0000
+  rotate: false
+  xy: 658, 1
+  size: 80, 50
+  orig: 80, 50
+  offset: 0, 0
+  index: -1
+ghosts/red/right/0001
+  rotate: false
+  xy: 658, 53
+  size: 80, 50
+  orig: 80, 50
+  offset: 0, 0
+  index: -1
+ghosts/red/up/0000
+  rotate: false
+  xy: 740, 1
+  size: 80, 50
+  orig: 80, 50
+  offset: 0, 0
+  index: -1
+ghosts/red/up/0001
+  rotate: false
+  xy: 740, 53
+  size: 80, 50
+  orig: 80, 50
+  offset: 0, 0
+  index: -1
+pacman/walk/0001
+  rotate: false
+  xy: 356, 1
+  size: 136, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
+pacman/walk/0002
+  rotate: false
+  xy: 183, 1
+  size: 171, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
+pacman/walk/0003
+  rotate: false
+  xy: 1, 1
+  size: 180, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
+pacman/walk/0004
+  rotate: false
+  xy: 183, 1
+  size: 171, 120
+  orig: 180, 120
+  offset: 0, 0
+  index: -1
