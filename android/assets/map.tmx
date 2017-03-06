@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="pacman" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
-  <image source="C:/Users/AriaGrt/Desktop/pacman.minimap.jpg" width="1024" height="1024"/>
+  <image source="pacman.minimap.jpg" width="1024" height="1024"/>
  </tileset>
  <layer name="Calque de Tile 1" width="32" height="32">
   <data encoding="csv">
