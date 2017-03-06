@@ -23,7 +23,7 @@ public class LoadingScreen extends ScreenAdapter {
         super.show();
         assetManager.load("splash.png", Texture.class);
         assetManager.load("sprites.txt", TextureAtlas.class);
-        assetManager.load("map.tmx", TiledMap.class);//Tmx TmxMapLoader().load("map.tmx");
+        assetManager.load("map.tmx", TiledMap.class);
     }
 
     @Override
