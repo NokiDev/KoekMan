@@ -1,99 +1,67 @@
 package com.kekman.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.FileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.kekman.game.Entities.Pacman;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class KekMan extends ScreenAdapter implements InputProcessor {
-	private final LoadingScreenGame game = (LoadingScreenGame) Gdx.app.getApplicationListener();
-	private final AssetManager assetManager = game.getAssetManager();
-	private final Batch batch = game.getBatch();
+public class KekMan extends Game {
 
-	Texture img;
-	TiledMap tiledMap;
-	OrthographicCamera camera;
-	TiledMapRenderer tiledMapRenderer;
-	TiledMapTileLayer layer;
-	Pacman pacman;
+    public static final int WORLD_WIDTH = 800, WORLD_HEIGHT = 480;
 
-	@Override
-	public void show() {
-		tiledMap = assetManager.get("map.tmx", TiledMap.class);
-		pacman = new Pacman(assetManager.get("sprites.txt", TextureAtlas.class));
-		layer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
-		int w = layer.getWidth();
-		int h = layer.getHeight();
-		System.out.print(w + "+" + h);
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false,w*32,h*32);
-		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-		tiledMapRenderer.setView(camera);
-		Gdx.input.setInputProcessor(this);
-	}
+    private final AssetManager assetManager = new AssetManager();
 
-	@Override
-	public void render(float delta) {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    private ShapeRenderer shapeRenderer;
+    private SpriteBatch batch;
+    private Viewport viewport;
 
-		/* Replace with stage rendering */
-		tiledMapRenderer.render();
-		pacman.act(Gdx.graphics.getDeltaTime());
-		batch.begin();
-		pacman.draw(batch, .5f);
-		batch.end();
-	}
+    @Override
+    public void create() {
+        FileHandleResolver resolver = new InternalFileHandleResolver();
+        assetManager.setLoader(TiledMap.class, new TmxMapLoader(resolver));
 
-	@Override
-	public boolean keyDown(int keycode) {
-		return false;
-	}
+        batch = new SpriteBatch();
+        viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT);
+        shapeRenderer = new ShapeRenderer();
+        setScreen(new LoadingScreen());
+    }
 
-	@Override
-	public boolean keyUp(int keycode) {
-		return false;
-	}
+    @Override
+    public void resize(int width, int height) {
+        viewport.update(width, height, true);
+        batch.setProjectionMatrix(viewport.getCamera().combined);
+        shapeRenderer.setProjectionMatrix(viewport.getCamera().combined);
+    }
 
-	@Override
-	public boolean keyTyped(char character) {
+    @Override
+    public void render() {
+        clearScreen();
+        super.render();
+    }
 
-		return false;
-	}
+    public SpriteBatch getBatch() {
+        return batch;
+    }
 
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
+    public ShapeRenderer getShapeRenderer() {
+        return shapeRenderer;
+    }
 
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
+    public AssetManager getAssetManager() {
+        return assetManager;
+    }
 
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		return false;
-	}
+    private void clearScreen() {
+        Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    }
 }

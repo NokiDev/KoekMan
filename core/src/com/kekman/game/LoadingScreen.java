@@ -11,10 +11,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 
 public class LoadingScreen extends ScreenAdapter {
 
-    private static final float PROGRESS_BAR_WIDTH = LoadingScreenGame.WORLD_WIDTH / 2f;
+    private static final float PROGRESS_BAR_WIDTH = KekMan.WORLD_WIDTH / 2f;
     private static final float PROGRESS_BAR_HEIGHT = 50f;
 
-    private final LoadingScreenGame game = (LoadingScreenGame) Gdx.app.getApplicationListener();
+    private final KekMan game = (KekMan) Gdx.app.getApplicationListener();
     private final AssetManager assetManager = game.getAssetManager();
     private final ShapeRenderer shapeRenderer = game.getShapeRenderer();
 
@@ -33,7 +33,7 @@ public class LoadingScreen extends ScreenAdapter {
 
         if (assetManager.update()) {
             // Comment this out if you just want to see the progress bar. As this can be quite quick on desktop.
-            game.setScreen(new KekMan());
+            game.setScreen(new GameScreen());
         }
     }
 
@@ -42,8 +42,8 @@ public class LoadingScreen extends ScreenAdapter {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.rect(
-                (LoadingScreenGame.WORLD_WIDTH - PROGRESS_BAR_WIDTH) / 2f,
-                (LoadingScreenGame.WORLD_HEIGHT - PROGRESS_BAR_HEIGHT) / 2f,
+                (KekMan.WORLD_WIDTH - PROGRESS_BAR_WIDTH) / 2f,
+                (KekMan.WORLD_HEIGHT - PROGRESS_BAR_HEIGHT) / 2f,
                 PROGRESS_BAR_WIDTH * progress,
                 PROGRESS_BAR_HEIGHT
         );
