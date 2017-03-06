@@ -12,6 +12,8 @@ public class Pacman extends Entity {
         setName("pacman");
         setAtlas(atlas);
         setAnimation("walk");
+        setPosition(50, 50);
+        setSize(50, 50);
     }
 
     @Override

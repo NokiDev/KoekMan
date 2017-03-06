@@ -14,7 +14,7 @@ import java.util.Map;
  * Created by elytum on 06/03/2017.
  */
 
-public class Animations extends Sprite {
+public class Animations extends Sprite implements IAnimation {
     private final String                        mEntityName;
     private String                              mAnimation;
     private final HashMap<String, Animation<TextureRegion>>    mAnimationsArray;
@@ -73,6 +73,6 @@ public class Animations extends Sprite {
             System.out.println("Can't draw "+this);
             return;
         }
-        batch.draw(animation.getKeyFrame(mStateTime), getX(), getY());
+        batch.draw(animation.getKeyFrame(mStateTime), getX(), getY(), getWidth(), getHeight());
     }
 }
