@@ -17,7 +17,11 @@ import java.util.Map;
 public class Animations extends Sprite {
     private final String                        mEntityName;
     private String                              mAnimation;
-    private final HashMap<String, Animation>    mAnimationsArray;
+    private final HashMap<String, Animation<TextureRegion>>    mAnimationsArray;
+
+    public String toString() {
+        return "(Entity: "+mEntityName+", animation: "+mAnimation+" with: "+mAnimationsArray+")";
+    }
 
     public Animations(final TextureAtlas atlas, final String entityName) {
         mEntityName = entityName;
@@ -25,8 +29,8 @@ public class Animations extends Sprite {
 
         final HashMap<String, Array<TextureRegion>>    mFoundRegions = new HashMap<String, Array<TextureRegion>>();
         for (TextureAtlas.AtlasRegion region: atlas.getRegions()) {
-            if (region.name.startsWith(entityName)) {
-                final String animation = region.name.substring(entityName.length() + 1);
+            if (region.name.startsWith(mEntityName)) {
+                final String animation = region.name.substring(mEntityName.length() + 1);
                 final String[] frameInformation = animation.split("/");
                 if (frameInformation.length != 2)
                     continue;
@@ -39,7 +43,7 @@ public class Animations extends Sprite {
             }
         }
 
-        mAnimationsArray = new HashMap<String, Animation>();
+        mAnimationsArray = new HashMap<String, Animation<TextureRegion>>();
         for (Map.Entry<String, Array<TextureRegion>> entry : mFoundRegions.entrySet()) {
             String                  name = entry.getKey();
             Array<TextureRegion>    region = entry.getValue();
@@ -64,6 +68,11 @@ public class Animations extends Sprite {
     }
 
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw((TextureRegion)mAnimationsArray.get(mAnimation).getKeyFrame(mStateTime), getX(), getY());
+        Animation<TextureRegion> animation = mAnimationsArray.get(mAnimation);
+        if (animation == null) {
+            System.out.println("Can't draw "+this);
+            return;
+        }
+        batch.draw(animation.getKeyFrame(mStateTime), getX(), getY());
     }
 }
