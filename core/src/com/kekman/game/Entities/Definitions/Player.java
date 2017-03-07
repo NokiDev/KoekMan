@@ -16,6 +16,7 @@ public class Player extends MovingEntity {
         super.act(delta);
         CollisionDetector.applyCollision(GameMap.getEntities(), this);
     }
+
     @Override
     public void onCollision(final Entity collider) {
         super.onCollision(collider);
