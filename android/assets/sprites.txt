@@ -1,25 +1,25 @@
 sprites.png
-size: 510, 1444
+size: 507, 1467
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 ghosts/blue/walk_down/0000
   rotate: false
-  xy: 298, 1
+  xy: 294, 214
   size: 211, 274
   orig: 300, 300
   offset: 49, 4
   index: -1
 ghosts/blue/walk_down/0001
   rotate: false
-  xy: 280, 697
+  xy: 268, 915
   size: 228, 276
   orig: 300, 300
   offset: 37, 4
   index: -1
 ghosts/blue/walk_down/0002
-  rotate: true
-  xy: 1, 886
+  rotate: false
+  xy: 1, 1193
   size: 200, 273
   orig: 300, 300
   offset: 57, 5
@@ -47,7 +47,7 @@ ghosts/blue/walk_left/0002
   index: -1
 ghosts/blue/walk_right/0000
   rotate: false
-  xy: 1, 1088
+  xy: 1, 886
   size: 265, 176
   orig: 300, 300
   offset: 35, 38
@@ -68,105 +68,105 @@ ghosts/blue/walk_right/0002
   index: -1
 ghosts/blue/walk_up/0000
   rotate: false
-  xy: 294, 277
+  xy: 288, 490
   size: 215, 202
   orig: 300, 300
   offset: 58, 24
   index: -1
 ghosts/blue/walk_up/0001
-  rotate: true
-  xy: 276, 975
+  rotate: false
+  xy: 298, 1
   size: 208, 211
   orig: 300, 300
   offset: 57, 15
   index: -1
 ghosts/blue/walk_up/0002
-  rotate: true
-  xy: 288, 481
+  rotate: false
+  xy: 280, 694
   size: 214, 219
   orig: 300, 300
   offset: 59, 7
   index: -1
 ghosts/red/down/0000
   rotate: false
-  xy: 427, 1185
+  xy: 183, 1064
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/down/0001
   rotate: false
-  xy: 427, 1237
+  xy: 183, 1116
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/left/0000
   rotate: false
-  xy: 427, 1289
+  xy: 376, 1193
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/left/0001
   rotate: false
-  xy: 427, 1341
+  xy: 376, 1245
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/right/0000
   rotate: false
-  xy: 245, 1393
+  xy: 376, 1297
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/right/0001
   rotate: false
-  xy: 327, 1393
+  xy: 341, 1349
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/up/0000
   rotate: false
-  xy: 409, 1393
+  xy: 423, 1349
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/up/0001
   rotate: false
-  xy: 268, 1185
+  xy: 341, 1401
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 pacman/walk/0001
-  rotate: true
-  xy: 123, 1266
+  rotate: false
+  xy: 203, 1315
   size: 136, 120
   orig: 180, 120
   offset: 0, 0
   index: -1
 pacman/walk/0002
-  rotate: true
-  xy: 1, 1266
+  rotate: false
+  xy: 203, 1193
   size: 171, 120
   orig: 180, 120
   offset: 0, 0
   index: -1
 pacman/walk/0003
   rotate: false
-  xy: 245, 1266
+  xy: 1, 1064
   size: 180, 120
   orig: 180, 120
   offset: 0, 0
   index: -1
 pacman/walk/0004
-  rotate: true
-  xy: 1, 1266
+  rotate: false
+  xy: 203, 1193
   size: 171, 120
   orig: 180, 120
   offset: 0, 0
