@@ -12,8 +12,8 @@ import com.kekman.game.Tools.Tilemap.TilemapUtils;
  */
 
 public class Entity extends Actor {
-    protected final int DEFAULT_WIDTH = 28;
-    protected final int DEFAULT_HEIGHT = 28;
+    protected final int DEFAULT_WIDTH = 32;
+    protected final int DEFAULT_HEIGHT = 32;
 
     protected Entity(final String name, final TextureAtlas atlas, int tileX, int tileY) {
         setName(name);

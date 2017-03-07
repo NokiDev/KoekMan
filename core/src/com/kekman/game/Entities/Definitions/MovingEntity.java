@@ -19,7 +19,7 @@ public class MovingEntity extends Entity {
 
     private int         mDirection = DirectionHandler.UP;
     private int         mNextDirection = DirectionHandler.UNKNOWN;
-    private int         mSpeed = 50;
+    private int         mSpeed = 100;
 
 
     @Override
@@ -27,11 +27,11 @@ public class MovingEntity extends Entity {
         super.act(delta);
         final TiledMap tiledMap = GameMap.getTilesMap();
         if (tiledMap != null) {
-            if (canGoDirection(tiledMap, mNextDirection, mSpeed)) {
+            if (canGoDirection(tiledMap, mNextDirection, mSpeed * delta)) {
                 changeDirection(mNextDirection);
                 mNextDirection = DirectionHandler.UNKNOWN;
             }
-            else if (!canGoDirection(tiledMap, mDirection, mSpeed)) {
+            else if (!canGoDirection(tiledMap, mDirection, mSpeed * delta)) {
                 changeDirection(DirectionHandler.UNKNOWN);
                 mNextDirection = DirectionHandler.UNKNOWN;
             }
@@ -52,10 +52,10 @@ public class MovingEntity extends Entity {
             default:
                 break;
         }
-        if (getX()> 700){
+        if (getX() > 700){
             setX(0);
         }
-        else if (getX()< 0){
+        else if (getX() < 0){
             setX(700);
         }
         if (getY() - getHeight() / 2 > KekMan.WORLD_WIDTH)
