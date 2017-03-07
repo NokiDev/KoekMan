@@ -3,12 +3,13 @@ package com.kekman.game.Tools.Keyboard;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.input.GestureDetector;
 
 /**
  * Created by elytum on 06/03/2017.
  */
 
-public class Keyboard implements InputProcessor {
+public class Keyboard extends GestureDetector.GestureAdapter implements InputProcessor {
     private int mLastKey = Input.Keys.UNKNOWN;
 
     public void setInputProcessor() {
@@ -27,8 +28,8 @@ public class Keyboard implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
-        if (mLastKey == keycode)
-            mLastKey = Input.Keys.UNKNOWN;
+        //if (mLastKey == keycode)
+            //mLastKey = Input.Keys.UNKNOWN;
         return false;
     }
 
@@ -53,7 +54,26 @@ public class Keyboard implements InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        System.out.println(screenX + "-" + screenY + " / " + pointer);
         return false;
+    }
+
+    @Override
+    public boolean fling(float velocityX, float velocityY, int button) {
+        if(Math.abs(velocityX)>Math.abs(velocityY)){
+            if(velocityX>0){
+                mLastKey = Input.Keys.RIGHT;
+            }else{
+                mLastKey = Input.Keys.LEFT;
+            }
+        }else{
+            if(velocityY>0){
+                mLastKey = Input.Keys.DOWN;
+            }else{
+                mLastKey = Input.Keys.UP;
+            }
+        }
+        return super.fling(velocityX, velocityY, button);
     }
 
     @Override
