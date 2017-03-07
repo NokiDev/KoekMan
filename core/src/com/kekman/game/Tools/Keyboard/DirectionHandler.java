@@ -29,10 +29,10 @@ public class DirectionHandler {
     private IDirectionListener    mDirectionListener;
 
     public DirectionHandler(final IDirectionListener directionListener) {
-        setDirectionLIstener(directionListener);
+        setDirectionListener(directionListener);
     }
 
-    public void setDirectionLIstener(final IDirectionListener directionListener) {
+    public void setDirectionListener(final IDirectionListener directionListener) {
         mDirectionListener = directionListener;
     }
 
