@@ -54,7 +54,12 @@ public class Animations extends Sprite implements IAnimation {
 
     public void setAnimation(final String animation) {
         mAnimation = animation;
-//        mStateTime = 0;
+    }
+
+    public void setAnimation(final String animation, boolean reset) {
+        setAnimation(animation);
+        if (reset)
+            mStateTime = 0;
     }
 
     private float mStateTime = 0;
