@@ -80,10 +80,12 @@ public class Entity extends Actor {
             default:
                 break;
         }
-        if (getX() + getWidth() / 2 > KekMan.WORLD_WIDTH)
-            setX(getX() - KekMan.WORLD_WIDTH);
-        else if (getX() + getWidth() / 2 < 0)
-            setX(getX() + KekMan.WORLD_WIDTH);
+        if (getX()> 700){
+            setX(0);
+        }
+        else if (getX()< 0){
+            setX(700);
+        }
         if (getY() - getHeight() / 2 > KekMan.WORLD_WIDTH)
             setY(getY() - KekMan.WORLD_HEIGHT);
         else if (getY() - getHeight() / 2 < 0)
