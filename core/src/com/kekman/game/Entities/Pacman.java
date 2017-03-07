@@ -1,15 +1,18 @@
 package com.kekman.game.Entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.kekman.game.Entities.Definitions.Bonus;
+import com.kekman.game.Entities.Definitions.Enemy;
+import com.kekman.game.Entities.Definitions.Entity;
+import com.kekman.game.Entities.Definitions.Player;
 import com.kekman.game.Map.GameMap;
 import com.kekman.game.Tools.CollisionDetector.CollisionDetector;
-import com.kekman.game.Tools.Keyboard.DirectionHandler;
 
 /**
  * Created by elytum on 06/03/2017.
  */
 
-public class Pacman extends Entity {
+public class Pacman extends Player {
     private final int DEFAULT_WIDTH = 28;
     private final int DEFAULT_HEIGHT = 28;
 
@@ -17,41 +20,16 @@ public class Pacman extends Entity {
         setName("pacman");
         setAtlas(atlas);
         setAnimation("walk_right");
-        setPosition(32, 32);
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-    }
-
-    @Override
-    protected void directionChanged() {
-        int direction = getDirection();
-        switch (direction) {
-            case DirectionHandler.UP:
-                setAnimation("walk_up");
-                break;
-            case DirectionHandler.DOWN:
-                setAnimation("walk_down");
-                break;
-            case DirectionHandler.LEFT:
-                setAnimation("walk_left");
-                break;
-            case DirectionHandler.RIGHT:
-                setAnimation("walk_right");
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public void setAtlas(final TextureAtlas atlas) {
-        super.setAtlas(atlas);
+        setCell(1, 1);
     }
 
     @Override
     public void onCollision(final Entity collider) {
-//        System.out.println("Colliding with: "+collider);
         if (collider instanceof Enemy) {
-//            System.out.println("DIE");
+            System.out.println("DIE");
+        } else if (collider instanceof Bonus) {
+            System.out.println("EAT BONUS");
         }
     }
 

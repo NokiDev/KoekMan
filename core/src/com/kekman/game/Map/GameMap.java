@@ -14,10 +14,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kekman.game.Entities.Ball;
 import com.kekman.game.Entities.Blinky;
 import com.kekman.game.Entities.Clyde;
-import com.kekman.game.Entities.Entity;
+import com.kekman.game.Entities.Definitions.Entity;
 import com.kekman.game.Entities.Inky;
 import com.kekman.game.Entities.Pacman;
 import com.kekman.game.Entities.Pinky;
+import com.kekman.game.Tools.Random.RandomUtils;
 import com.kekman.game.Tools.Renderers.TextureMapObjectRenderer;
 import com.kekman.game.Tools.Tilemap.TilemapUtils;
 
@@ -97,10 +98,10 @@ public class GameMap extends Stage {
         mLayer = (TiledMapTileLayer)mTiledMap.getLayers().get(0);
 
         mPacman = new Pacman(mManager.get("sprites.txt", TextureAtlas.class));
-        mPinky = new Pinky(mManager.get("sprites.txt", TextureAtlas.class),mPacman);
-        mBlinky = new Blinky(mManager.get("sprites.txt", TextureAtlas.class), mPacman);
-        mClyde = new Clyde(mManager.get("sprites.txt", TextureAtlas.class), mPacman);
-        mInky = new Inky(mManager.get("sprites.txt", TextureAtlas.class), mPacman);
+        mPinky = new Pinky(mManager.get("sprites.txt", TextureAtlas.class));
+        mBlinky = new Blinky(mManager.get("sprites.txt", TextureAtlas.class));
+        mClyde = new Clyde(mManager.get("sprites.txt", TextureAtlas.class));
+        mInky = new Inky(mManager.get("sprites.txt", TextureAtlas.class));
         mEntities.add(mPacman);
         mEntities.add(mPinky);
         mEntities.add(mBlinky);
@@ -120,22 +121,24 @@ public class GameMap extends Stage {
     public void render(float delta, final SpriteBatch batch) {
         act(delta);
         render(batch);
+    }
 
+    public void spawnRandomBonus() {
+        int[] test = randomEmptyCell();
+        if (test != null) {
+            System.out.println("(" + test[0] + ", " + test[1] + ")");
+            Entity test2 = new Inky(mManager.get("sprites.txt", TextureAtlas.class));
+            test2.setCell(test[0], test[1]);
+            mEntities.add(test2);
+            addActor(test2);
+        }
     }
 
     public void render(final SpriteBatch batch) {
         if (mCamera == null)
             return;
-        int[] test = randomEmptyCell();
-        if (test != null) {
-            System.out.println("(" + test[0] + ", " + test[1] + ")");
-            Entity test2 = new Inky(mManager.get("sprites.txt", TextureAtlas.class), mPacman);
-            test2.setCell(test[0], test[1]);
-            mEntities.add(test2);
-            addActor(test2);
-        }
-        else
-            System.out.println("WTF ?");
+        if (RandomUtils.randInt(50) == 0)
+            spawnRandomBonus();
         tiledMapRenderer.render();
         draw();
     }

@@ -1,59 +1,24 @@
-package com.kekman.game.Entities;
+package com.kekman.game.Entities.Definitions;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.kekman.game.KekMan;
 import com.kekman.game.Map.GameMap;
-import com.kekman.game.Tools.Animations.Animations;
 import com.kekman.game.Tools.CollisionDetector.CollisionDetector;
 import com.kekman.game.Tools.Keyboard.DirectionHandler;
-import com.kekman.game.Tools.Tilemap.TilemapUtils;
 
 /**
- * Created by elytum on 06/03/2017.
+ * Created by elytum on 07/03/2017.
  */
 
-public class Entity extends Actor {
-    private Animations  mAnimations;
+public class MovingEntity extends Entity {
     private int         mDirection = DirectionHandler.UP;
     private int         mNextDirection = DirectionHandler.UNKNOWN;
     private int         mSpeed = 5;
 
-    public String toString() {
-        return super.toString()+" -> "+mAnimations;
-    }
-
-    protected void directionChanged() {
-    }
-    protected int getDirection() {return mDirection;}
-
-    private void changeDirection(final int direction) {
-        mDirection = direction;
-        directionChanged();
-    }
-
-    protected void setAtlas(final TextureAtlas atlas) {
-        mAnimations = new Animations(atlas, getName());
-    }
-
-    protected void setAnimation(final String animation) {
-        mAnimations.setAnimation(animation);
-    }
-
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-        if (mAnimations != null)
-            mAnimations.draw(batch, parentAlpha);
-    }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (mAnimations != null)
-            mAnimations.act(delta);
         final TiledMap tiledMap = GameMap.getTilesMap();
         if (tiledMap != null) {
             if (canGoDirection(tiledMap, mNextDirection, mSpeed)) {
@@ -93,16 +58,31 @@ public class Entity extends Actor {
             setY(getY() + KekMan.WORLD_HEIGHT);
     }
 
-    @Override
-    protected void	positionChanged() {
-        super.positionChanged();
-        mAnimations.setPosition(getX(), getY());
+    protected void directionChanged() {
+        int direction = getDirection();
+        switch (direction) {
+            case DirectionHandler.UP:
+                setAnimation("walk_up");
+                break;
+            case DirectionHandler.DOWN:
+                setAnimation("walk_down");
+                break;
+            case DirectionHandler.LEFT:
+                setAnimation("walk_left");
+                break;
+            case DirectionHandler.RIGHT:
+                setAnimation("walk_right");
+                break;
+            default:
+                break;
+        }
     }
 
-    @Override
-    protected void	sizeChanged() {
-        super.sizeChanged();
-        mAnimations.setSize(getWidth(), getHeight());
+    protected int getDirection() {return mDirection;}
+
+    private void changeDirection(final int direction) {
+        mDirection = direction;
+        directionChanged();
     }
 
     private boolean canGo(final TiledMap map, float moveX, float moveY) {
@@ -177,14 +157,5 @@ public class Entity extends Actor {
         else
             changeDirection(DirectionHandler.RIGHT);
         return true;
-    }
-
-    public void onCollision(final Entity collider) {
-    }
-
-    public void setCell(int x, int y) {
-        float width = TilemapUtils.getTileWidth(GameMap.getTilesMap());
-        float height = TilemapUtils.getTileHeight(GameMap.getTilesMap());
-        setPosition(x * width, y * height);
     }
 }

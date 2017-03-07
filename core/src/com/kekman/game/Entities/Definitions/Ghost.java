@@ -1,4 +1,4 @@
-package com.kekman.game.Entities;
+package com.kekman.game.Entities.Definitions;
 
 import com.badlogic.gdx.graphics.Color;
 
@@ -14,8 +14,6 @@ public class Ghost extends Enemy {
     private float currentTimer = 0.0f;
 
     private Color color;
-    protected final int DEFAULT_WIDTH = 30;
-    protected final int DEFAULT_HEIGHT = 30;
 
     @Override
     public void act(float delta){

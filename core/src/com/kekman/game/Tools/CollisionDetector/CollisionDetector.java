@@ -15,7 +15,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
-import com.kekman.game.Entities.Entity;
+import com.kekman.game.Entities.Definitions.Entity;
 
 /**
  * Created by elytum on 06/03/2017.

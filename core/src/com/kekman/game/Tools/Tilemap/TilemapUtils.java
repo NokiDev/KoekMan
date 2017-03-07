@@ -114,8 +114,8 @@ public class TilemapUtils {
                 int   tileX = (int)(x / tileWidth);
                 float y = properties.get("y", float.class);
                 int   tileY = (int)(y / tileHeight);
-                float width = properties.get("width", float.class);
-                float height = properties.get("height", float.class);
+                float width = properties.get("width", float.class) + x % tileWidth;
+                float height = properties.get("height", float.class) + y % tileHeight;
 
                 int posX = tileX - 1;
                 for (float w = width; w > 0; w -= tileWidth) {
