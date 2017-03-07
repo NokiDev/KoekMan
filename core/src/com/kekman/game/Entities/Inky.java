@@ -8,7 +8,11 @@ import com.kekman.game.Tools.Keyboard.DirectionHandler;
  */
 
 public class Inky extends Ghost{
-    public Inky(final TextureAtlas atlas){
+
+    Pacman pacmanRef;
+
+    public Inky(final TextureAtlas atlas, Pacman pacman){
+        pacmanRef = pacman;
         setName("inky");
         setAtlas(atlas);
         setAnimation("walk_up");
@@ -39,5 +43,10 @@ public class Inky extends Ghost{
     @Override
     public void setAtlas(final TextureAtlas atlas) {
         super.setAtlas(atlas);
+    }
+
+    @Override
+    public void act(float delta){
+
     }
 }

@@ -8,7 +8,11 @@ import com.kekman.game.Tools.Keyboard.DirectionHandler;
  */
 
 public class Clyde extends Ghost{
-    public Clyde(final TextureAtlas atlas){
+
+    Pacman pacmanRef;
+
+    public Clyde(final TextureAtlas atlas, Pacman pacman){
+        pacmanRef = pacman;
         setName("clyde");
         setAtlas(atlas);
         setAnimation("walk_up");
@@ -40,5 +44,10 @@ public class Clyde extends Ghost{
     @Override
     public void setAtlas(final TextureAtlas atlas) {
         super.setAtlas(atlas);
+    }
+
+    @Override
+    public void act(float delta){
+
     }
 }

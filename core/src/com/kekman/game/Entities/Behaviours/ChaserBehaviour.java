@@ -5,4 +5,5 @@ package com.kekman.game.Entities.Behaviours;
  */
 
 public class ChaserBehaviour implements IBehaviour {
+
 }

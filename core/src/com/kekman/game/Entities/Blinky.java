@@ -8,7 +8,11 @@ import com.kekman.game.Tools.Keyboard.DirectionHandler;
  */
 
 public class Blinky extends Ghost{
-    public Blinky(final TextureAtlas atlas){
+
+    private Pacman pacmanRef;
+
+    public Blinky(final TextureAtlas atlas, Pacman pacman){
+        pacmanRef = pacman;
         setName("blinky");
         setAtlas(atlas);
         setAnimation("walk_up");
@@ -38,5 +42,10 @@ public class Blinky extends Ghost{
     @Override
     public void setAtlas(final TextureAtlas atlas) {
         super.setAtlas(atlas);
+    }
+
+    @Override
+    public void act(float delta){
+
     }
 }
