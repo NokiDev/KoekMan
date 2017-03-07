@@ -45,8 +45,4 @@ public class Inky extends Ghost{
         super.setAtlas(atlas);
     }
 
-    @Override
-    public void act(float delta){
-
-    }
 }

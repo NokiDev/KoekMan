@@ -3,6 +3,8 @@ package com.kekman.game.Entities;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.kekman.game.Tools.Keyboard.DirectionHandler;
 
+import java.util.Random;
+
 /**
  * Created by bluedragonfly on 07/03/17.
  */
@@ -10,6 +12,8 @@ import com.kekman.game.Tools.Keyboard.DirectionHandler;
 public class Blinky extends Ghost{
 
     private Pacman pacmanRef;
+    private float timer = 2.0f;
+    private float currentTimer = 0.0f;
 
     public Blinky(final TextureAtlas atlas, Pacman pacman){
         pacmanRef = pacman;
@@ -44,8 +48,4 @@ public class Blinky extends Ghost{
         super.setAtlas(atlas);
     }
 
-    @Override
-    public void act(float delta){
-
-    }
 }

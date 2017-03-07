@@ -45,9 +45,4 @@ public class Clyde extends Ghost{
     public void setAtlas(final TextureAtlas atlas) {
         super.setAtlas(atlas);
     }
-
-    @Override
-    public void act(float delta){
-
-    }
 }

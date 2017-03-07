@@ -44,9 +44,4 @@ public class Pinky extends Ghost{
     public void setAtlas(final TextureAtlas atlas) {
         super.setAtlas(atlas);
     }
-
-    @Override
-    public void act(float delta){
-
-    }
 }
