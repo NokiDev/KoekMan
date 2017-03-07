@@ -1,0 +1,110 @@
+tileset.png
+size: 54, 90
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+colliders/bottom.jpeg
+  rotate: false
+  xy: 1, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+colliders/corner_0.jpeg
+  rotate: false
+  xy: 19, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+colliders/corner_1.jpeg
+  rotate: false
+  xy: 37, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+colliders/corner_2.jpeg
+  rotate: false
+  xy: 1, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+colliders/corner_3.jpeg
+  rotate: false
+  xy: 19, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+colliders/horizontal.jpeg
+  rotate: false
+  xy: 37, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+colliders/left.jpeg
+  rotate: false
+  xy: 1, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+colliders/right.jpeg
+  rotate: false
+  xy: 19, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+colliders/t_0.jpeg
+  rotate: false
+  xy: 37, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+colliders/t_1.jpeg
+  rotate: false
+  xy: 1, 55
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+colliders/t_2.jpeg
+  rotate: false
+  xy: 19, 55
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+colliders/t_3.jpeg
+  rotate: false
+  xy: 37, 55
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+colliders/up.jpeg
+  rotate: false
+  xy: 1, 73
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+colliders/vertical.jpeg
+  rotate: false
+  xy: 19, 73
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+empty.jpeg
+  rotate: false
+  xy: 37, 73
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1

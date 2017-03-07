@@ -1,4 +1,4 @@
-package com.kekman.game;
+package com.kekman.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.kekman.game.KekMan;
 
 public class LoadingScreen extends ScreenAdapter {
 
@@ -33,7 +34,7 @@ public class LoadingScreen extends ScreenAdapter {
 
         if (assetManager.update()) {
             // Comment this out if you just want to see the progress bar. As this can be quite quick on desktop.
-            game.setScreen(new GameScreen());
+            game.setScreen(new com.kekman.game.Screens.GameScreen());
         }
     }
 

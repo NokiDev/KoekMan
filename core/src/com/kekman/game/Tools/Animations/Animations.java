@@ -50,7 +50,6 @@ public class Animations extends Sprite implements IAnimation {
 
             mAnimationsArray.put(name, new Animation<TextureRegion>(.1f, region, Animation.PlayMode.LOOP));
         }
-        System.out.println(mAnimationsArray);
     }
 
     public void setAnimation(final String animation) {

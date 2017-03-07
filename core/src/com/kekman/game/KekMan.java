@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class KekMan extends Game {
 
-    public static final int WORLD_WIDTH = 800, WORLD_HEIGHT = 480;
+    public static final int WORLD_WIDTH = 800, WORLD_HEIGHT = 800;
 
     private final AssetManager assetManager = new AssetManager();
 
@@ -32,7 +32,7 @@ public class KekMan extends Game {
         batch = new SpriteBatch();
         viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT);
         shapeRenderer = new ShapeRenderer();
-        setScreen(new LoadingScreen());
+        setScreen(new com.kekman.game.Screens.LoadingScreen());
     }
 
     @Override
@@ -58,6 +58,10 @@ public class KekMan extends Game {
 
     public AssetManager getAssetManager() {
         return assetManager;
+    }
+
+    public Viewport getViewport() {
+        return viewport;
     }
 
     private void clearScreen() {
