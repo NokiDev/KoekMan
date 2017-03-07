@@ -32,25 +32,25 @@ public class GameScreen extends ScreenAdapter {
 		mDirectionHandler = new DirectionHandler(new DirectionHandler.ADirectionListener() {
 			@Override
 			public Ternary onUp() {
-				System.out.println("Going up");
+				mMap.goPlayerUp();
 				return new Ternary(Ternary.TRUE);
 			}
 
 			@Override
 			public Ternary onDown() {
-				System.out.println("Going down");
+				mMap.goPlayerDown();
 				return new Ternary(Ternary.TRUE);
 			}
 
 			@Override
 			public Ternary onLeft() {
-				System.out.println("Going left");
+				mMap.goPlayerLeft();
 				return new Ternary(Ternary.TRUE);
 			}
 
 			@Override
 			public Ternary onRight() {
-				System.out.println("Going right");
+				mMap.goPlayerRight();
 				return new Ternary(Ternary.TRUE);
 			}
 		});

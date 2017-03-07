@@ -16,6 +16,7 @@ import com.kekman.game.Tools.Keyboard.DirectionHandler;
 public class Entity extends Actor {
     private Animations  mAnimations;
     private int         mDirection = DirectionHandler.UP;
+    private int         mNextDirection = DirectionHandler.UNKNOWN;
     private int         mSpeed = 5;
 
     public String toString() {
@@ -44,9 +45,14 @@ public class Entity extends Actor {
             mAnimations.act(delta);
         final TiledMap tiledMap = GameMap.getTilesMap();
         if (tiledMap != null) {
-            boolean flag = canGoDirection(tiledMap, mDirection, mSpeed);
-            if (!flag)
-                mDirection = DirectionHandler.UNKNOWN;
+            if (canGoDirection(tiledMap, mNextDirection, mSpeed)) {
+                mDirection = mNextDirection;
+                mNextDirection = DirectionHandler.UNKNOWN;
+            }
+            else if (!canGoDirection(tiledMap, mDirection, mSpeed)) {
+                mDirection = mNextDirection;
+                mNextDirection = DirectionHandler.UNKNOWN;
+            }
         }
         switch (mDirection) {
             case DirectionHandler.UP:
@@ -114,5 +120,41 @@ public class Entity extends Actor {
             default:
                 return false;
         }
+    }
+
+    public boolean setDirectionUp() {
+        final TiledMap map = GameMap.getTilesMap();
+        if (map != null && !canGoUp(map, mSpeed))
+            mNextDirection = DirectionHandler.UP;
+        else
+            mDirection = DirectionHandler.UP;
+        return true;
+    }
+
+    public boolean setDirectionDown() {
+        final TiledMap map = GameMap.getTilesMap();
+        if (map != null && !canGoDown(map, mSpeed))
+            mNextDirection = DirectionHandler.DOWN;
+        else
+            mDirection = DirectionHandler.DOWN;
+        return true;
+    }
+
+    public boolean setDirectionLeft() {
+        final TiledMap map = GameMap.getTilesMap();
+        if (map != null && !canGoLeft(map, mSpeed))
+            mNextDirection = DirectionHandler.LEFT;
+        else
+            mDirection = DirectionHandler.LEFT;
+        return true;
+    }
+
+    public boolean setDirectionRight() {
+        final TiledMap map = GameMap.getTilesMap();
+        if (map != null && !canGoRight(map, mSpeed))
+            mNextDirection = DirectionHandler.RIGHT;
+        else
+            mDirection = DirectionHandler.RIGHT;
+        return true;
     }
 }

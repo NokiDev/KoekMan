@@ -92,4 +92,20 @@ public class GameMap extends Stage {
     public void act(float delta) {
         mPacman.act(Gdx.graphics.getDeltaTime());
     }
+
+    public void goPlayerUp() {
+        mPacman.setDirectionUp();
+    }
+
+    public void goPlayerDown() {
+        mPacman.setDirectionDown();
+    }
+
+    public void goPlayerLeft() {
+        mPacman.setDirectionLeft();
+    }
+
+    public void goPlayerRight() {
+        mPacman.setDirectionRight();
+    }
 }
