@@ -14,4 +14,8 @@ public class Inky extends Ghost{
         setPosition(22, 12);
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
+    @Override
+    public void setAtlas(final TextureAtlas atlas) {
+        super.setAtlas(atlas);
+    }
 }

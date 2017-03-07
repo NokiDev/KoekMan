@@ -14,4 +14,8 @@ public class Pinky extends Ghost{
         setPosition(15, 28);
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
+    @Override
+    public void setAtlas(final TextureAtlas atlas) {
+        super.setAtlas(atlas);
+    }
 }

@@ -14,4 +14,8 @@ public class Clyde extends Ghost{
         setPosition(12, 22);
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
+    @Override
+    public void setAtlas(final TextureAtlas atlas) {
+        super.setAtlas(atlas);
+    }
 }
