@@ -10,32 +10,6 @@ import com.kekman.game.Tools.Random.RandomUtils;
 /**
  * Created by elytum on 07/03/2017.
  */
-//            tiledMap.getLayers().get(0)
-//        TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
-//        for (MapLayer layer: tiledMap.getLayers()) {
-//            TiledMapTileLayer la = layer;
-//            layer.getLa
-//        }
-//        for (MapLayer layer: tiledMap.getLayers()) {
-//            for (MapObject object: layer.getObjects()) {
-//                MapProperties properties = object.getProperties();
-//                float width = properties.get("x", float.class);
-//                float height = properties.get("y", float.class);
-//
-//                System.out.println(width+" "+height);
-////                Iterator<String> keys = properties.getKeys();
-////                while (keys.hasNext()) {
-////                    final String key = keys.next();
-//
-////                    System.out.println("Key: "+key);
-////                    System.out.println(properties.get(key));
-////                    if (key.equals("gid")) {
-////                        properties.get("gid");
-////                        System.out.println(properties.get("gid"));
-////                    }
-////                }
-//            }
-//        }
 
 public class TilemapUtils {
     public static int           getWidth(final MapLayer mapLayer) {
