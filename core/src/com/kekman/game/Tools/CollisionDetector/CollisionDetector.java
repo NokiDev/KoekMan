@@ -25,17 +25,17 @@ public class CollisionDetector {
         return new Rectangle(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
     }
 
-    public static Rectangle getRectangle(final TextureMapObject text) {
+    public static RectangleMapObject getRectangle(final TextureMapObject text) {
         final MapProperties properties = text.getProperties();
         float x = text.getX();
         float y = text.getY();
         float width = properties.get("width", Float.class);
         float height = properties.get("height", Float.class);
 
-        return new Rectangle(x, y, width, height);
+        return new RectangleMapObject(x, y, width, height);
     }
 
-    public static Polygon getPolygon(final TextureMapObject text) {
+    public static PolygonMapObject getPolygon(final TextureMapObject text) {
         final MapProperties properties = text.getProperties();
         float x = text.getX();
         float y = text.getY();
@@ -50,22 +50,22 @@ public class CollisionDetector {
         };
         final Polygon polygon = new Polygon(points);
         polygon.rotate(text.getRotation());
-        return polygon;
+        return new PolygonMapObject(polygon);
     }
 
-    public static Object checkCollision(int layerId, final TiledMap map, final Rectangle entityRectangle) {
+    public static MapObject checkCollision(int layerId, final TiledMap map, final Rectangle entityRectangle) {
         final MapLayer mapLayer = map.getLayers().get(layerId);
 
         for (MapObject object : mapLayer.getObjects())
             if (object instanceof TextureMapObject) {
                 TextureMapObject text = (TextureMapObject) object;
                 if (text.getRotation() == 0) {
-                    final Rectangle rectangle = getRectangle(text);
-                    if (isCollision(rectangle, entityRectangle))
+                    final RectangleMapObject rectangle = getRectangle(text);
+                    if (isCollision(rectangle.getRectangle(), entityRectangle))
                         return rectangle;
                 } else {
-                    final Polygon polygon = getPolygon(text);
-                    if (isCollision(polygon, entityRectangle))
+                    final PolygonMapObject polygon = getPolygon(text);
+                    if (isCollision(polygon.getPolygon(), entityRectangle))
                         return polygon;
                 }
             } else if (object instanceof RectangleMapObject) {
@@ -91,19 +91,19 @@ public class CollisionDetector {
         return null;
     }
 
-    public static Object checkCollision(int layerId, final TiledMap map, final Entity entity) {
+    public static MapObject checkCollision(int layerId, final TiledMap map, final Entity entity) {
         return checkCollision(layerId, map, getRectangle(entity));
     }
 
-    public static Object checkCollision(final TiledMap map, final Entity entity) {
+    public static MapObject checkCollision(final TiledMap map, final Entity entity) {
         return checkCollision(map, getRectangle(entity));
     }
 
-    public static Object checkCollision(final TiledMap map, final Rectangle entityRectangle) {
+    public static MapObject checkCollision(final TiledMap map, final Rectangle entityRectangle) {
         final int       range = map.getLayers().getCount();
 
         for (int i=0; i < range; i++) {
-            Object collider = checkCollision(i, map, entityRectangle);
+            MapObject collider = checkCollision(i, map, entityRectangle);
             if (collider != null)
                 return collider;
         }

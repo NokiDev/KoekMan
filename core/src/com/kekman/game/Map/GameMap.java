@@ -11,7 +11,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kekman.game.Entities.Pacman;
-import com.kekman.game.Tools.CollisionDetector.CollisionDetector;
 import com.kekman.game.Tools.Renderers.TextureMapObjectRenderer;
 
 /**
@@ -19,6 +18,7 @@ import com.kekman.game.Tools.Renderers.TextureMapObjectRenderer;
  */
 
 public class GameMap extends Stage {
+    private static GameMap              instance;
     private final AssetManager          mManager;
     private OrthographicCamera          mCamera;
     private TiledMapTileLayer           mLayer;
@@ -27,14 +27,25 @@ public class GameMap extends Stage {
 
     private TiledMapRenderer tiledMapRenderer;
 
+    public static GameMap getInstance() {
+        return instance;
+    }
+
+    public static TiledMap getTilesMap() {
+        if (instance == null)
+            return null;
+        return instance.mTiledMap;
+    }
 
     public GameMap(final AssetManager manager, final Viewport viewport) {
         super(viewport);
+        instance = this;
         mManager = manager;
         loadAssets();
     }
 
     public GameMap(final AssetManager manager) {
+        instance = this;
         mManager = manager;
         loadAssets();
     }
@@ -74,14 +85,8 @@ public class GameMap extends Stage {
     public void render(final SpriteBatch batch) {
         if (mCamera == null)
             return;
-//        CollisionDetector.checkCollision(mTiledMap, mPacman);
-        System.out.println(CollisionDetector.checkCollision(mTiledMap, mPacman));
-
         tiledMapRenderer.render();
         draw();
-//        batch.begin();
-//        mPacman.draw(batch, .5f);
-//        batch.end();
     }
 
     public void act(float delta) {
