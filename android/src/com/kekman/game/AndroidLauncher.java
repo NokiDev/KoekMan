@@ -10,6 +10,6 @@ public class AndroidLauncher extends AndroidApplication {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new com.kekman.game.Screens.GameScreen(), config);
+		initialize(new com.kekman.game.KekMan(), config);
 	}
 }
