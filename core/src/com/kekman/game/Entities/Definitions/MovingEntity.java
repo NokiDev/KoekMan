@@ -19,7 +19,7 @@ public class MovingEntity extends Entity {
 
     private int         mDirection = DirectionHandler.UP;
     private int         mNextDirection = DirectionHandler.UNKNOWN;
-    private int         mSpeed = 5;
+    private int         mSpeed = 50;
 
 
     @Override
@@ -38,16 +38,16 @@ public class MovingEntity extends Entity {
         }
         switch (mDirection) {
             case DirectionHandler.UP:
-                moveBy(0, mSpeed);
+                moveBy(0, mSpeed * delta);
                 break;
             case DirectionHandler.DOWN:
-                moveBy(0, -mSpeed);
+                moveBy(0, -mSpeed * delta);
                 break;
             case DirectionHandler.LEFT:
-                moveBy(-mSpeed, 0);
+                moveBy(-mSpeed * delta, 0);
                 break;
             case DirectionHandler.RIGHT:
-                moveBy(mSpeed, 0);
+                moveBy(mSpeed * delta, 0);
                 break;
             default:
                 break;
