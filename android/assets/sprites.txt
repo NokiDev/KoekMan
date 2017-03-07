@@ -1,88 +1,172 @@
 sprites.png
-size: 821, 122
+size: 510, 1444
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+ghosts/blue/walk_down/0000
+  rotate: false
+  xy: 298, 1
+  size: 211, 274
+  orig: 300, 300
+  offset: 49, 4
+  index: -1
+ghosts/blue/walk_down/0001
+  rotate: false
+  xy: 280, 697
+  size: 228, 276
+  orig: 300, 300
+  offset: 37, 4
+  index: -1
+ghosts/blue/walk_down/0002
+  rotate: true
+  xy: 1, 886
+  size: 200, 273
+  orig: 300, 300
+  offset: 57, 5
+  index: -1
+ghosts/blue/walk_left/0000
+  rotate: false
+  xy: 1, 165
+  size: 291, 174
+  orig: 300, 300
+  offset: 5, 23
+  index: -1
+ghosts/blue/walk_left/0001
+  rotate: false
+  xy: 1, 1
+  size: 295, 162
+  orig: 300, 300
+  offset: 5, 23
+  index: -1
+ghosts/blue/walk_left/0002
+  rotate: false
+  xy: 1, 341
+  size: 285, 167
+  orig: 300, 300
+  offset: 5, 25
+  index: -1
+ghosts/blue/walk_right/0000
+  rotate: false
+  xy: 1, 1088
+  size: 265, 176
+  orig: 300, 300
+  offset: 35, 38
+  index: -1
+ghosts/blue/walk_right/0001
+  rotate: false
+  xy: 1, 694
+  size: 277, 190
+  orig: 300, 300
+  offset: 23, 7
+  index: -1
+ghosts/blue/walk_right/0002
+  rotate: false
+  xy: 1, 510
+  size: 280, 182
+  orig: 300, 300
+  offset: 20, 17
+  index: -1
+ghosts/blue/walk_up/0000
+  rotate: false
+  xy: 294, 277
+  size: 215, 202
+  orig: 300, 300
+  offset: 58, 24
+  index: -1
+ghosts/blue/walk_up/0001
+  rotate: true
+  xy: 276, 975
+  size: 208, 211
+  orig: 300, 300
+  offset: 57, 15
+  index: -1
+ghosts/blue/walk_up/0002
+  rotate: true
+  xy: 288, 481
+  size: 214, 219
+  orig: 300, 300
+  offset: 59, 7
+  index: -1
 ghosts/red/down/0000
   rotate: false
-  xy: 494, 1
+  xy: 427, 1185
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/down/0001
   rotate: false
-  xy: 494, 53
+  xy: 427, 1237
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/left/0000
   rotate: false
-  xy: 576, 1
+  xy: 427, 1289
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/left/0001
   rotate: false
-  xy: 576, 53
+  xy: 427, 1341
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/right/0000
   rotate: false
-  xy: 658, 1
+  xy: 245, 1393
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/right/0001
   rotate: false
-  xy: 658, 53
+  xy: 327, 1393
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/up/0000
   rotate: false
-  xy: 740, 1
+  xy: 409, 1393
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 ghosts/red/up/0001
   rotate: false
-  xy: 740, 53
+  xy: 268, 1185
   size: 80, 50
   orig: 80, 50
   offset: 0, 0
   index: -1
 pacman/walk/0001
-  rotate: false
-  xy: 356, 1
+  rotate: true
+  xy: 123, 1266
   size: 136, 120
   orig: 180, 120
   offset: 0, 0
   index: -1
 pacman/walk/0002
-  rotate: false
-  xy: 183, 1
+  rotate: true
+  xy: 1, 1266
   size: 171, 120
   orig: 180, 120
   offset: 0, 0
   index: -1
 pacman/walk/0003
   rotate: false
-  xy: 1, 1
+  xy: 245, 1266
   size: 180, 120
   orig: 180, 120
   offset: 0, 0
   index: -1
 pacman/walk/0004
-  rotate: false
-  xy: 183, 1
+  rotate: true
+  xy: 1, 1266
   size: 171, 120
   orig: 180, 120
   offset: 0, 0

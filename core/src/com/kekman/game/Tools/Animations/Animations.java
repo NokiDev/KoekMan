@@ -42,6 +42,7 @@ public class Animations extends Sprite implements IAnimation {
                 foundRegion.add(region);
             }
         }
+        System.out.println(mFoundRegions+" -> "+mAnimation);
 
         mAnimationsArray = new HashMap<String, Animation<TextureRegion>>();
         for (Map.Entry<String, Array<TextureRegion>> entry : mFoundRegions.entrySet()) {

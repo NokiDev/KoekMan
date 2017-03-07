@@ -51,7 +51,8 @@ public class Entity extends Actor {
                 mNextDirection = DirectionHandler.UNKNOWN;
             }
             else if (!canGoDirection(tiledMap, mDirection, mSpeed)) {
-                return;
+                mDirection = DirectionHandler.UNKNOWN;
+                mNextDirection = DirectionHandler.UNKNOWN;
             }
         }
         switch (mDirection) {

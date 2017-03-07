@@ -11,9 +11,10 @@ public class Pacman extends Entity {
     private final int DEFAULT_HEIGHT = 28;
 
     public Pacman(final TextureAtlas atlas) {
-        setName("pacman");
+//        setName("pacman");
+        setName("ghosts/blue");
         setAtlas(atlas);
-        setAnimation("walk");
+        setAnimation("walk_down");
         setPosition(32, 32);
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
