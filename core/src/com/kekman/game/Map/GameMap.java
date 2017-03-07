@@ -1,6 +1,5 @@
 package com.kekman.game.Map;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -78,6 +77,11 @@ public class GameMap extends Stage {
         cameraUpdated();
     }
 
+    protected void onResize(int width, int height, final Viewport viewport) {
+//        setCamera(v);
+//        tiledMapRenderer.setView(viewport.getCamera());
+    }
+
     private void cameraUpdated() {
         int w = mLayer.getWidth();
         int h = mLayer.getHeight();
@@ -126,8 +130,8 @@ public class GameMap extends Stage {
     public void spawnRandomBonus() {
         int[] test = randomEmptyCell();
         if (test != null) {
-            System.out.println("(" + test[0] + ", " + test[1] + ")");
-            Entity test2 = new Inky(mManager.get("sprites.txt", TextureAtlas.class), test[0], test[1]);
+//            System.out.println("(" + test[0] + ", " + test[1] + ")");
+            Entity test2 = new Ball(mManager.get("sprites.txt", TextureAtlas.class), test[0], test[1]);
             mEntities.add(test2);
             addActor(test2);
         }
@@ -136,18 +140,15 @@ public class GameMap extends Stage {
     public void render(final SpriteBatch batch) {
         if (mCamera == null)
             return;
-        if (RandomUtils.randInt(50) == 0)
-            spawnRandomBonus();
         tiledMapRenderer.render();
         draw();
     }
 
+    @Override
     public void act(float delta) {
-        mPacman.act(Gdx.graphics.getDeltaTime());
-        mBlinky.act(Gdx.graphics.getDeltaTime());
-        mPinky.act(Gdx.graphics.getDeltaTime());
-        mInky.act(Gdx.graphics.getDeltaTime());
-        mClyde.act(Gdx.graphics.getDeltaTime());
+        super.act(delta);
+        if (RandomUtils.randInt(50) == 0)
+            spawnRandomBonus();
     }
 
     public void goPlayerUp() {

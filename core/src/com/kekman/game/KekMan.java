@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class KekMan extends Game {
@@ -30,15 +30,20 @@ public class KekMan extends Game {
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(resolver));
 
         batch = new SpriteBatch();
-        viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT);
+        viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT);
         shapeRenderer = new ShapeRenderer();
         setScreen(new com.kekman.game.Screens.LoadingScreen());
     }
 
+    protected void onResize(int width, int height, final Viewport viewport) {
+    }
+
     @Override
     public void resize(int width, int height) {
+        viewport.update(width, height, true);
         batch.setProjectionMatrix(viewport.getCamera().combined);
         shapeRenderer.setProjectionMatrix(viewport.getCamera().combined);
+        onResize(width, height, viewport);
     }
 
     @Override
