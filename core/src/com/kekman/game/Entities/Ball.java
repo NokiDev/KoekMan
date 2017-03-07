@@ -8,9 +8,9 @@ import com.kekman.game.Entities.Definitions.Bonus;
  */
 
 public class Ball extends Bonus {
-    static public final String name = "ball";
+    static public final String name = "dot";
 
     public Ball(final TextureAtlas atlas, int tileX, int tileY){
-        super("blinky", atlas, tileX, tileY);
+        super(name, atlas, tileX, tileY);
     }
 }
