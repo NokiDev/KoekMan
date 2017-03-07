@@ -10,7 +10,11 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.kekman.game.Entities.Blinky;
+import com.kekman.game.Entities.Clyde;
+import com.kekman.game.Entities.Inky;
 import com.kekman.game.Entities.Pacman;
+import com.kekman.game.Entities.Pinky;
 import com.kekman.game.Tools.Renderers.TextureMapObjectRenderer;
 
 /**
@@ -24,6 +28,11 @@ public class GameMap extends Stage {
     private TiledMapTileLayer           mLayer;
     private TiledMap                    mTiledMap;
     private Pacman                      mPacman;
+    private Pinky                       mPinky;
+    private Inky                        mInky;
+    private Clyde                       mClyde;
+    private Blinky                      mBlinky;
+
 
     private TiledMapRenderer tiledMapRenderer;
 
@@ -74,7 +83,15 @@ public class GameMap extends Stage {
         mLayer = (TiledMapTileLayer)mTiledMap.getLayers().get(0);
 
         mPacman = new Pacman(mManager.get("sprites.txt", TextureAtlas.class));
+        mPinky = new Pinky(mManager.get("sprites.txt", TextureAtlas.class));
+        mBlinky = new Blinky(mManager.get("sprites.txt", TextureAtlas.class));
+        mClyde = new Clyde(mManager.get("sprites.txt", TextureAtlas.class));
+        mInky = new Inky(mManager.get("sprites.txt", TextureAtlas.class));
         addActor(mPacman);
+        addActor(mPinky);
+        addActor(mBlinky);
+        addActor(mClyde);
+        addActor(mInky);
     }
 
     public void render(float delta, final SpriteBatch batch) {
