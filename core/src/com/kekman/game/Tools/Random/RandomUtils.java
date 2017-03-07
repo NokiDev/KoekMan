@@ -10,12 +10,10 @@ public class RandomUtils {
     static private Random rand = new Random(System.currentTimeMillis());
 
     public static int randInt(int min, int max) {
-        int randomNum = rand.nextInt((max - min) + 1) + min;
-        return randomNum;
+        return rand.nextInt((max - min) + 1) + min;
     }
 
     public static int randInt(int max) {
-        int randomNum = rand.nextInt(max + 1);
-        return randomNum;
+        return rand.nextInt(max + 1);
     }
 }
