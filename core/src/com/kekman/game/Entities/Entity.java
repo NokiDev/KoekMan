@@ -24,6 +24,15 @@ public class Entity extends Actor {
         return super.toString()+" -> "+mAnimations;
     }
 
+    protected void directionChanged() {
+    }
+    protected int getDirection() {return mDirection;}
+
+    private void changeDirection(final int direction) {
+        mDirection = direction;
+        directionChanged();
+    }
+
     protected void setAtlas(final TextureAtlas atlas) {
         mAnimations = new Animations(atlas, getName());
     }
@@ -47,11 +56,11 @@ public class Entity extends Actor {
         final TiledMap tiledMap = GameMap.getTilesMap();
         if (tiledMap != null) {
             if (canGoDirection(tiledMap, mNextDirection, mSpeed)) {
-                mDirection = mNextDirection;
+                changeDirection(mNextDirection);
                 mNextDirection = DirectionHandler.UNKNOWN;
             }
             else if (!canGoDirection(tiledMap, mDirection, mSpeed)) {
-                mDirection = DirectionHandler.UNKNOWN;
+                changeDirection(DirectionHandler.UNKNOWN);
                 mNextDirection = DirectionHandler.UNKNOWN;
             }
         }
@@ -136,7 +145,7 @@ public class Entity extends Actor {
         if (map != null && !canGoUp(map, mSpeed))
             mNextDirection = DirectionHandler.UP;
         else
-            mDirection = DirectionHandler.UP;
+            changeDirection(DirectionHandler.UP);
         return true;
     }
 
@@ -145,7 +154,7 @@ public class Entity extends Actor {
         if (map != null && !canGoDown(map, mSpeed))
             mNextDirection = DirectionHandler.DOWN;
         else
-            mDirection = DirectionHandler.DOWN;
+            changeDirection(DirectionHandler.DOWN);
         return true;
     }
 
@@ -154,7 +163,7 @@ public class Entity extends Actor {
         if (map != null && !canGoLeft(map, mSpeed))
             mNextDirection = DirectionHandler.LEFT;
         else
-            mDirection = DirectionHandler.LEFT;
+            changeDirection(DirectionHandler.LEFT);
         return true;
     }
 
@@ -163,7 +172,7 @@ public class Entity extends Actor {
         if (map != null && !canGoRight(map, mSpeed))
             mNextDirection = DirectionHandler.RIGHT;
         else
-            mDirection = DirectionHandler.RIGHT;
+            changeDirection(DirectionHandler.RIGHT);
         return true;
     }
 }
