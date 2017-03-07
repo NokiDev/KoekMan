@@ -8,7 +8,9 @@ import com.kekman.game.Entities.Definitions.Ghost;
  */
 
 public class Blinky extends Ghost {
+    static public final String name = "blinky";
+
     public Blinky(final TextureAtlas atlas, int tileX, int tileY) {
-        super("blinky", atlas, tileY, tileY);
+        super(name, atlas, tileY, tileY);
     }
 }

@@ -8,7 +8,9 @@ import com.kekman.game.Entities.Definitions.Ghost;
  */
 
 public class Pinky extends Ghost {
+    static public final String name = "pinky";
+
     public Pinky(final TextureAtlas atlas, int tileX, int tileY){
-        super("pinky", atlas, tileX, tileY);
+        super(name, atlas, tileX, tileY);
     }
 }

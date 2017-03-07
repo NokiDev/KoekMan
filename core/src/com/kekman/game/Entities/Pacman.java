@@ -8,11 +8,9 @@ import com.kekman.game.Entities.Definitions.Player;
  */
 
 public class Pacman extends Player {
-    private final int DEFAULT_WIDTH = 28;
-    private final int DEFAULT_HEIGHT = 28;
+    static public final String name = "pacman";
 
     public Pacman(final TextureAtlas atlas, int tileX, int tileY) {
-        super("pacman", atlas, tileX, tileY);
-//        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        super(name, atlas, tileX, tileY);
     }
 }

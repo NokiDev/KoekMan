@@ -8,8 +8,9 @@ import com.kekman.game.Entities.Definitions.Ghost;
  */
 
 public class Clyde extends Ghost {
+    static public final String name = "clyde";
 
     public Clyde(final TextureAtlas atlas, int tileX, int tileY){
-        super("clyde", atlas, tileX, tileY);
+        super(name, atlas, tileX, tileY);
     }
 }
