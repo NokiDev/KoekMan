@@ -54,7 +54,6 @@ public class CollisionDetector {
     }
 
     public static Object checkCollision(int layerId, final TiledMap map, final Rectangle entityRectangle) {
-        System.out.println("checkCollision");
         final MapLayer mapLayer = map.getLayers().get(layerId);
 
         for (MapObject object : mapLayer.getObjects())
@@ -112,7 +111,6 @@ public class CollisionDetector {
     }
 
     private static boolean isCollision(Rectangle r1, Rectangle r2) {
-//        System.out.println(r1+" x "+r2);
         return Intersector.overlaps(r1, r2);
     }
 

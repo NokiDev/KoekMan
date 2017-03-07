@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
  */
 
 public class Pacman extends Entity {
-    private final int DEFAULT_WIDTH = 32;
-    private final int DEFAULT_HEIGHT = 32;
+    private final int DEFAULT_WIDTH = 31;
+    private final int DEFAULT_HEIGHT = 31;
 
     public Pacman(final TextureAtlas atlas) {
         setName("pacman");
         setAtlas(atlas);
         setAnimation("walk");
-        setPosition(64, 64);
+        setPosition(65, 65);
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
 
