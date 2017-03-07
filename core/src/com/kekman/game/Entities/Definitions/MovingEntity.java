@@ -12,8 +12,8 @@ import com.kekman.game.Tools.Keyboard.DirectionHandler;
  */
 
 public class MovingEntity extends Entity {
-    protected MovingEntity(final String name, final TextureAtlas atlas) {
-        super(name,atlas);
+    protected MovingEntity(final String name, final TextureAtlas atlas, int tileX, int tileY) {
+        super(name,atlas, tileX, tileY);
         setAnimation("walk_up");
     }
 

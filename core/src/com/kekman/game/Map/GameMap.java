@@ -97,11 +97,11 @@ public class GameMap extends Stage {
         mMapColliders = TilemapUtils.getEmptyCells(mTiledMap);
         mLayer = (TiledMapTileLayer)mTiledMap.getLayers().get(0);
 
-        mPacman = new Pacman(mManager.get("sprites.txt", TextureAtlas.class));
-        mPinky = new Pinky(mManager.get("sprites.txt", TextureAtlas.class));
-        mBlinky = new Blinky(mManager.get("sprites.txt", TextureAtlas.class));
-        mClyde = new Clyde(mManager.get("sprites.txt", TextureAtlas.class));
-        mInky = new Inky(mManager.get("sprites.txt", TextureAtlas.class));
+        mPacman = new Pacman(mManager.get("sprites.txt", TextureAtlas.class), 1, 1);
+        mPinky = new Pinky(mManager.get("sprites.txt", TextureAtlas.class), 1, 1);
+        mBlinky = new Blinky(mManager.get("sprites.txt", TextureAtlas.class), 1, 1);
+        mClyde = new Clyde(mManager.get("sprites.txt", TextureAtlas.class), 1, 1);
+        mInky = new Inky(mManager.get("sprites.txt", TextureAtlas.class), 1, 1);
         mEntities.add(mPacman);
         mEntities.add(mPinky);
         mEntities.add(mBlinky);
@@ -127,8 +127,7 @@ public class GameMap extends Stage {
         int[] test = randomEmptyCell();
         if (test != null) {
             System.out.println("(" + test[0] + ", " + test[1] + ")");
-            Entity test2 = new Inky(mManager.get("sprites.txt", TextureAtlas.class));
-            test2.setCell(test[0], test[1]);
+            Entity test2 = new Inky(mManager.get("sprites.txt", TextureAtlas.class), test[0], test[1]);
             mEntities.add(test2);
             addActor(test2);
         }

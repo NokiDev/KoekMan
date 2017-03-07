@@ -8,8 +8,7 @@ import com.kekman.game.Entities.Definitions.Ghost;
  */
 
 public class Inky extends Ghost {
-    public Inky(final TextureAtlas atlas){
-        super("inky", atlas);
-        setCell(1, 1);
+    public Inky(final TextureAtlas atlas, int tileX, int tileY) {
+        super("inky", atlas, tileX, tileY);
     }
 }

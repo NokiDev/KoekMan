@@ -7,5 +7,5 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
  */
 
 public class Enemy extends MovingEntity {
-    protected Enemy(final String name, final TextureAtlas atlas) {super(name,atlas);}
+    protected Enemy(final String name, final TextureAtlas atlas, int tileX, int tileY) {super(name,atlas, tileX, tileY);}
 }

@@ -11,9 +11,8 @@ public class Pacman extends Player {
     private final int DEFAULT_WIDTH = 28;
     private final int DEFAULT_HEIGHT = 28;
 
-    public Pacman(final TextureAtlas atlas) {
-        super("pacman", atlas);
+    public Pacman(final TextureAtlas atlas, int tileX, int tileY) {
+        super("pacman", atlas, tileX, tileY);
 //        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        setCell(1, 1);
     }
 }

@@ -9,8 +9,7 @@ import com.kekman.game.Entities.Definitions.Ghost;
 
 public class Clyde extends Ghost {
 
-    public Clyde(final TextureAtlas atlas){
-        super("clyde", atlas);
-        setCell(1, 1);
+    public Clyde(final TextureAtlas atlas, int tileX, int tileY){
+        super("clyde", atlas, tileX, tileY);
     }
 }

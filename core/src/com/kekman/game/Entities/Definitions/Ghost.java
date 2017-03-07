@@ -1,6 +1,5 @@
 package com.kekman.game.Entities.Definitions;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import java.util.Random;
@@ -10,12 +9,10 @@ import java.util.Random;
  */
 
 public class Ghost extends Enemy {
-    protected Ghost(final String name, final TextureAtlas atlas) {super(name,atlas);}
+    protected Ghost(final String name, final TextureAtlas atlas, int tileX, int tileY) {super(name,atlas, tileX, tileY);}
 
     private float timer = 1.0f;
     private float currentTimer = 0.0f;
-
-    private Color color;
 
     @Override
     public void act(float delta){

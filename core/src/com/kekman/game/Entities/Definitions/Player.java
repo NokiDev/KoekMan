@@ -9,8 +9,8 @@ import com.kekman.game.Tools.CollisionDetector.CollisionDetector;
  */
 
 public class Player extends MovingEntity {
-    protected Player(final String name, final TextureAtlas atlas) {super(name,atlas);}
-    
+    protected Player(final String name, final TextureAtlas atlas, int tileX, int tileY) {super(name,atlas, tileX, tileY);}
+
     @Override
     public void act(float delta) {
         super.act(delta);

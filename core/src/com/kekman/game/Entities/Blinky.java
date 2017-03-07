@@ -8,8 +8,7 @@ import com.kekman.game.Entities.Definitions.Ghost;
  */
 
 public class Blinky extends Ghost {
-    public Blinky(final TextureAtlas atlas){
-        super("blinky", atlas);
-        setCell(1, 1);
+    public Blinky(final TextureAtlas atlas, int tileX, int tileY) {
+        super("blinky", atlas, tileY, tileY);
     }
 }

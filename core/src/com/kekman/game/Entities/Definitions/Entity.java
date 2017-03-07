@@ -15,10 +15,11 @@ public class Entity extends Actor {
     protected final int DEFAULT_WIDTH = 28;
     protected final int DEFAULT_HEIGHT = 28;
 
-    protected Entity(final String name, final TextureAtlas atlas) {
+    protected Entity(final String name, final TextureAtlas atlas, int tileX, int tileY) {
         setName(name);
         setAtlas(atlas);
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        setCell(tileX, tileY);
     }
 
     private Animations  mAnimations;

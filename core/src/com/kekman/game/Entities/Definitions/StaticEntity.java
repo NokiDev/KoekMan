@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
  */
 
 public class StaticEntity extends Entity {
-    protected StaticEntity(final String name, final TextureAtlas atlas) {
-        super(name,atlas);
+    protected StaticEntity(final String name, final TextureAtlas atlas, int tileX, int tileY) {
+        super(name,atlas, tileX, tileY);
         setAnimation("static");
     }
 }

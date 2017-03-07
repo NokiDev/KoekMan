@@ -7,5 +7,5 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
  */
 
 public class Bonus extends StaticEntity {
-    protected Bonus(final String name, final TextureAtlas atlas) {super(name,atlas);}
+    protected Bonus(final String name, final TextureAtlas atlas, int tileX, int tileY) {super(name,atlas, tileX, tileY);}
 }

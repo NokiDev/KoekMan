@@ -8,7 +8,7 @@ import com.kekman.game.Entities.Definitions.Bonus;
  */
 
 public class MaxiBall extends Bonus {
-    public MaxiBall(final TextureAtlas atlas) {
-        super("blinky", atlas);
+    public MaxiBall(final TextureAtlas atlas, int tileX, int tileY) {
+        super("blinky", atlas, tileX, tileY);
     }
 }

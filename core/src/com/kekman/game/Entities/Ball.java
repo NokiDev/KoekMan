@@ -8,7 +8,7 @@ import com.kekman.game.Entities.Definitions.Bonus;
  */
 
 public class Ball extends Bonus {
-    public Ball(final TextureAtlas atlas){
-        super("blinky", atlas);
+    public Ball(final TextureAtlas atlas, int tileX, int tileY){
+        super("blinky", atlas, tileX, tileY);
     }
 }
