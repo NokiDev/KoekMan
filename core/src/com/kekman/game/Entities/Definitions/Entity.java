@@ -15,47 +15,34 @@ public class Entity extends Actor {
     protected final int DEFAULT_WIDTH = 28;
     protected final int DEFAULT_HEIGHT = 28;
 
+    protected Entity(final String name, final TextureAtlas atlas) {
+        setName(name);
+        setAtlas(atlas);
+        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    }
+
     private Animations  mAnimations;
 
-    public String toString() {
-        return super.toString()+" -> "+mAnimations;
-    }
+    public String   toString() {return super.toString()+" -> "+mAnimations;}
+    protected void  setAtlas(final TextureAtlas atlas) {mAnimations = new Animations(atlas, getName());}
+    protected void  setAnimation(final String animation) {mAnimations.setAnimation(animation);}
+    public void     onCollision(final Entity collider) {}
 
-    protected void setAtlas(final TextureAtlas atlas) {
-        mAnimations = new Animations(atlas, getName());
-    }
-
-    protected void setAnimation(final String animation) {
-        mAnimations.setAnimation(animation);
-    }
+    @Override protected void	positionChanged() {super.positionChanged(); mAnimations.setPosition(getX(), getY());}
+    @Override protected void	sizeChanged() {super.sizeChanged(); mAnimations.setSize(getWidth(), getHeight());}
 
     @Override
-    public void draw(Batch batch, float parentAlpha) {
+    public void     draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         if (mAnimations != null)
             mAnimations.draw(batch, parentAlpha);
     }
 
     @Override
-    public void act(float delta) {
+    public void     act(float delta) {
         super.act(delta);
         if (mAnimations != null)
             mAnimations.act(delta);
-    }
-
-    @Override
-    protected void	positionChanged() {
-        super.positionChanged();
-        mAnimations.setPosition(getX(), getY());
-    }
-
-    @Override
-    protected void	sizeChanged() {
-        super.sizeChanged();
-        mAnimations.setSize(getWidth(), getHeight());
-    }
-
-    public void onCollision(final Entity collider) {
     }
 
     public void setCell(int x, int y) {

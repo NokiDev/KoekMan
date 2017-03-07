@@ -1,5 +1,6 @@
 package com.kekman.game.Entities.Definitions;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.kekman.game.KekMan;
 import com.kekman.game.Map.GameMap;
@@ -11,6 +12,11 @@ import com.kekman.game.Tools.Keyboard.DirectionHandler;
  */
 
 public class MovingEntity extends Entity {
+    protected MovingEntity(final String name, final TextureAtlas atlas) {
+        super(name,atlas);
+        setAnimation("walk_up");
+    }
+
     private int         mDirection = DirectionHandler.UP;
     private int         mNextDirection = DirectionHandler.UNKNOWN;
     private int         mSpeed = 5;

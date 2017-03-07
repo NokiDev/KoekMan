@@ -9,10 +9,7 @@ import com.kekman.game.Entities.Definitions.Ghost;
 
 public class Inky extends Ghost {
     public Inky(final TextureAtlas atlas){
-        setName("inky");
-        setAtlas(atlas);
-        setAnimation("walk_up");
-        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        super("inky", atlas);
         setCell(1, 1);
     }
 }

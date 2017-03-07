@@ -8,10 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Pinky extends com.kekman.game.Entities.Definitions.Ghost {
     public Pinky(final TextureAtlas atlas){
-        setName("pinky");
-        setAtlas(atlas);
-        setAnimation("walk_up");
-        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        super("pinky", atlas);
         setCell(1, 1);
     }
 }

@@ -9,10 +9,7 @@ import com.kekman.game.Entities.Definitions.Ghost;
 
 public class Blinky extends Ghost {
     public Blinky(final TextureAtlas atlas){
-        setName("blinky");
-        setAtlas(atlas);
-        setAnimation("walk_up");
-        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        super("blinky", atlas);
         setCell(1, 1);
     }
 }

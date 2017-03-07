@@ -10,10 +10,7 @@ import com.kekman.game.Entities.Definitions.Ghost;
 public class Clyde extends Ghost {
 
     public Clyde(final TextureAtlas atlas){
-        setName("clyde");
-        setAtlas(atlas);
-        setAnimation("walk_up");
-        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        super("clyde", atlas);
         setCell(1, 1);
     }
 }

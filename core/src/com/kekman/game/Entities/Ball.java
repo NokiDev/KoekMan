@@ -9,10 +9,6 @@ import com.kekman.game.Entities.Definitions.Bonus;
 
 public class Ball extends Bonus {
     public Ball(final TextureAtlas atlas){
-        setName("blinky");
-        setAtlas(atlas);
-        setAnimation("static");
-        setPosition(200, 32);
-        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        super("blinky", atlas);
     }
 }

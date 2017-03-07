@@ -1,5 +1,6 @@
 package com.kekman.game.Entities;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.kekman.game.Entities.Definitions.Bonus;
 
 /**
@@ -7,4 +8,7 @@ import com.kekman.game.Entities.Definitions.Bonus;
  */
 
 public class MaxiBall extends Bonus {
+    public MaxiBall(final TextureAtlas atlas) {
+        super("blinky", atlas);
+    }
 }

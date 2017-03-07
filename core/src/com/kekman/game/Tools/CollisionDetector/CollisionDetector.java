@@ -64,8 +64,10 @@ public class CollisionDetector {
     public static void applyCollision(final Array<Entity> entities, final Entity checked) {
         for (Entity entity: entities) {
             Entity collider = applyCollision(entity, checked);
-            if (collider != null)
+            if (collider != null) {
                 checked.onCollision(collider);
+                collider.onCollision(checked);
+            }
         }
     }
 
