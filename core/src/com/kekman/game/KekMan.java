@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class KekMan extends Game {
 
-    public static final int WORLD_WIDTH = 800, WORLD_HEIGHT = 800;
+    public static final int WORLD_WIDTH = 1600, WORLD_HEIGHT = 1600;
 
     private final AssetManager assetManager = new AssetManager();
 

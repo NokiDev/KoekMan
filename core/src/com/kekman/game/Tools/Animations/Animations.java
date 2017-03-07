@@ -49,7 +49,7 @@ public class Animations extends Sprite implements IAnimation {
             String                  name = entry.getKey();
             Array<TextureRegion>    region = entry.getValue();
 
-            mAnimationsArray.put(name, new Animation<TextureRegion>(.1f, region, Animation.PlayMode.LOOP));
+            mAnimationsArray.put(name, new Animation<TextureRegion>(.5f, region, Animation.PlayMode.LOOP));
         }
     }
 
