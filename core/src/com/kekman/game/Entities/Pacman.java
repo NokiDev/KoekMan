@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
  */
 
 public class Pacman extends Entity {
-    private final int DEFAULT_WIDTH = 25;
-    private final int DEFAULT_HEIGHT = 25;
+    private final int DEFAULT_WIDTH = 30;
+    private final int DEFAULT_HEIGHT = 30;
 
     public Pacman(final TextureAtlas atlas) {
         setName("pacman");

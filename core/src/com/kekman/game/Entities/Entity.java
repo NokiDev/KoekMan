@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.kekman.game.KekMan;
 import com.kekman.game.Map.GameMap;
 import com.kekman.game.Tools.Animations.Animations;
 import com.kekman.game.Tools.CollisionDetector.CollisionDetector;
@@ -70,6 +71,14 @@ public class Entity extends Actor {
             default:
                 break;
         }
+        if (getX() + getWidth() / 2 > KekMan.WORLD_WIDTH)
+            setX(getX() - KekMan.WORLD_WIDTH);
+        else if (getX() + getWidth() / 2 < 0)
+            setX(getX() + KekMan.WORLD_WIDTH);
+        if (getY() - getHeight() / 2 > KekMan.WORLD_WIDTH)
+            setY(getY() - KekMan.WORLD_HEIGHT);
+        else if (getY() - getHeight() / 2 < 0)
+            setY(getY() + KekMan.WORLD_HEIGHT);
     }
 
     @Override
