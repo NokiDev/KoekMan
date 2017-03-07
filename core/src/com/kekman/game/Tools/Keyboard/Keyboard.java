@@ -15,6 +15,7 @@ public class Keyboard implements InputProcessor {
         Gdx.input.setInputProcessor(this);
     }
 
+    @Override
     public boolean keyDown(int keycode) {
         mLastKey = keycode;
         return false;
@@ -24,6 +25,7 @@ public class Keyboard implements InputProcessor {
         return mLastKey;
     }
 
+    @Override
     public boolean keyUp(int keycode) {
         if (mLastKey == keycode)
             mLastKey = Input.Keys.UNKNOWN;
