@@ -14,7 +14,7 @@ public class Pacman extends Entity {
         setName("pacman");
         setAtlas(atlas);
         setAnimation("walk");
-        setPosition(65, 65);
+        setPosition(40, 35);
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
 
