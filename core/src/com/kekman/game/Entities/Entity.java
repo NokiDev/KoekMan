@@ -9,6 +9,7 @@ import com.kekman.game.Map.GameMap;
 import com.kekman.game.Tools.Animations.Animations;
 import com.kekman.game.Tools.CollisionDetector.CollisionDetector;
 import com.kekman.game.Tools.Keyboard.DirectionHandler;
+import com.kekman.game.Tools.Tilemap.TilemapUtils;
 
 /**
  * Created by elytum on 06/03/2017.
@@ -176,5 +177,14 @@ public class Entity extends Actor {
         else
             changeDirection(DirectionHandler.RIGHT);
         return true;
+    }
+
+    public void onCollision(final Entity collider) {
+    }
+
+    public void setCell(int x, int y) {
+        float width = TilemapUtils.getTileWidth(GameMap.getTilesMap());
+        float height = TilemapUtils.getTileHeight(GameMap.getTilesMap());
+        setPosition(x * width, y * height);
     }
 }

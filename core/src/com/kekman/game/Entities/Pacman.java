@@ -1,6 +1,8 @@
 package com.kekman.game.Entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.kekman.game.Map.GameMap;
+import com.kekman.game.Tools.CollisionDetector.CollisionDetector;
 import com.kekman.game.Tools.Keyboard.DirectionHandler;
 
 /**
@@ -43,5 +45,19 @@ public class Pacman extends Entity {
     @Override
     public void setAtlas(final TextureAtlas atlas) {
         super.setAtlas(atlas);
+    }
+
+    @Override
+    public void onCollision(final Entity collider) {
+//        System.out.println("Colliding with: "+collider);
+        if (collider instanceof Enemy) {
+//            System.out.println("DIE");
+        }
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        CollisionDetector.applyCollision(GameMap.getEntities(), this);
     }
 }

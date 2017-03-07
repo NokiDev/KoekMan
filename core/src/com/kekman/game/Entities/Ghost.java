@@ -1,7 +1,6 @@
 package com.kekman.game.Entities;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import java.util.Random;
 
@@ -9,7 +8,7 @@ import java.util.Random;
  * Created by bluedragonfly on 07/03/17.
  */
 
-public class Ghost extends Entity {
+public class Ghost extends Enemy {
 
     private float timer = 1.0f;
     private float currentTimer = 0.0f;

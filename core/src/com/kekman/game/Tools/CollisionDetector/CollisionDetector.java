@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Array;
 import com.kekman.game.Entities.Entity;
 
 /**
@@ -51,6 +52,21 @@ public class CollisionDetector {
         final Polygon polygon = new Polygon(points);
         polygon.rotate(text.getRotation());
         return new PolygonMapObject(polygon);
+    }
+
+    public static Entity applyCollision(final Entity collider, final Entity checked) {
+        if (collider.hashCode() == checked.hashCode())
+            return null;
+        if (isCollision(getRectangle(collider), getRectangle(checked)))
+            return collider;
+        else return null;
+    }
+    public static void applyCollision(final Array<Entity> entities, final Entity checked) {
+        for (Entity entity: entities) {
+            Entity collider = applyCollision(entity, checked);
+            if (collider != null)
+                checked.onCollision(collider);
+        }
     }
 
     public static MapObject checkCollision(int layerId, final TiledMap map, final Rectangle entityRectangle) {

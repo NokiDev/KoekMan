@@ -48,7 +48,7 @@ public class Animations extends Sprite implements IAnimation {
             String                  name = entry.getKey();
             Array<TextureRegion>    region = entry.getValue();
 
-            mAnimationsArray.put(name, new Animation<TextureRegion>(.2f, region, Animation.PlayMode.LOOP_PINGPONG));
+            mAnimationsArray.put(name, new Animation<TextureRegion>(.1f, region, Animation.PlayMode.LOOP_PINGPONG));
         }
     }
 

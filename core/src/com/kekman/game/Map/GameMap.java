@@ -9,14 +9,17 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kekman.game.Entities.Ball;
 import com.kekman.game.Entities.Blinky;
 import com.kekman.game.Entities.Clyde;
+import com.kekman.game.Entities.Entity;
 import com.kekman.game.Entities.Inky;
 import com.kekman.game.Entities.Pacman;
 import com.kekman.game.Entities.Pinky;
 import com.kekman.game.Tools.Renderers.TextureMapObjectRenderer;
+import com.kekman.game.Tools.Tilemap.TilemapUtils;
 
 /**
  * Created by elytum on 06/03/2017.
@@ -28,6 +31,9 @@ public class GameMap extends Stage {
     private OrthographicCamera          mCamera;
     private TiledMapTileLayer           mLayer;
     private TiledMap                    mTiledMap;
+    private boolean[][]                 mMapColliders;
+
+    private Array<Entity>               mEntities = new Array<Entity>();
     private Pacman                      mPacman;
     private Blinky                      mBlinky;
     private Inky                        mInky;
@@ -45,6 +51,12 @@ public class GameMap extends Stage {
         if (instance == null)
             return null;
         return instance.mTiledMap;
+    }
+
+    public static Array<Entity> getEntities() {
+        if (instance == null)
+            return null;
+        return instance.mEntities;
     }
 
     public GameMap(final AssetManager manager, final Viewport viewport) {
@@ -81,6 +93,7 @@ public class GameMap extends Stage {
         if (mTiledMap != null)
             mTiledMap.dispose();
         mTiledMap = mManager.get("map.tmx", TiledMap.class);
+        mMapColliders = TilemapUtils.getEmptyCells(mTiledMap);
         mLayer = (TiledMapTileLayer)mTiledMap.getLayers().get(0);
 
         mPacman = new Pacman(mManager.get("sprites.txt", TextureAtlas.class));
@@ -88,6 +101,11 @@ public class GameMap extends Stage {
         mBlinky = new Blinky(mManager.get("sprites.txt", TextureAtlas.class), mPacman);
         mClyde = new Clyde(mManager.get("sprites.txt", TextureAtlas.class), mPacman);
         mInky = new Inky(mManager.get("sprites.txt", TextureAtlas.class), mPacman);
+        mEntities.add(mPacman);
+        mEntities.add(mPinky);
+        mEntities.add(mBlinky);
+        mEntities.add(mClyde);
+        mEntities.add(mInky);
         addActor(mPacman);
         addActor(mPinky);
         addActor(mBlinky);
@@ -95,14 +113,29 @@ public class GameMap extends Stage {
         addActor(mInky);
     }
 
+    public int[] randomEmptyCell() {
+        return TilemapUtils.randomEmptyCell(mMapColliders);
+    }
+
     public void render(float delta, final SpriteBatch batch) {
         act(delta);
         render(batch);
+
     }
 
     public void render(final SpriteBatch batch) {
         if (mCamera == null)
             return;
+        int[] test = randomEmptyCell();
+        if (test != null) {
+            System.out.println("(" + test[0] + ", " + test[1] + ")");
+            Entity test2 = new Inky(mManager.get("sprites.txt", TextureAtlas.class), mPacman);
+            test2.setCell(test[0], test[1]);
+            mEntities.add(test2);
+            addActor(test2);
+        }
+        else
+            System.out.println("WTF ?");
         tiledMapRenderer.render();
         draw();
     }
