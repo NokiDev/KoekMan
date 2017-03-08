@@ -263,12 +263,4 @@ public class MovingEntity extends Entity {
                 break;
         }
     }
-
-    public int getCellX() {
-        return (int)((getX() + getWidth() / 2) / GameMap.getTileWidth());
-    }
-
-    public int getCellY() {
-        return (int)((getY() + getHeight() / 2) / GameMap.getTileHeight());
-    }
 }

@@ -12,9 +12,9 @@ import com.kekman.game.Entities.Definitions.Player;
 public class CT extends Bonus {
     static public final String  name = "ct";
     static public final int     value = 100;
-    static public final int     invicibilityDelay = 5000;
+    static public final float   invicibilityDelay = 5;
 
-    public CT(final TextureAtlas atlas, int tileX, int tileY){
+    public CT(final TextureAtlas atlas, int tileX, int tileY) {
         super(name, atlas, tileX, tileY, value);
     }
 

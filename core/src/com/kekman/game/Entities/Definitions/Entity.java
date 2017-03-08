@@ -63,4 +63,12 @@ public class Entity extends Actor {
         if (collider instanceof Bonus)
             ((Bonus) collider).applyBonus(this);
     }
+
+    public int getCellX() {
+        return (int)((getX() + getWidth() / 2) / GameMap.getTileWidth());
+    }
+
+    public int getCellY() {
+        return (int)((getY() + getHeight() / 2) / GameMap.getTileHeight());
+    }
 }

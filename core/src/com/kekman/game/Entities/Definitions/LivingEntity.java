@@ -7,6 +7,45 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
  */
 
 public class LivingEntity extends MovingEntity {
+    private boolean mInvincible = false;
+    private float   mInvincibilityDelay = 0;
+
+    public boolean isInvincible() {return mInvincible;}
+
+    private void setInvincible(boolean invincible) {
+        if (mInvincible == invincible)
+            return;
+        System.out.println("Invincible: "+invincible);
+        mInvincible = invincible;
+        if (!mInvincible)
+            mInvincibilityDelay = 0;
+    }
+
+    public void setInvincible(float delay) {
+        if (delay > mInvincibilityDelay) {
+            mInvincibilityDelay = delay;
+            setInvincible(true);
+        }
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if (mInvincible) {
+            mInvincibilityDelay -= delta;
+            if (mInvincibilityDelay < 0) {
+                setInvincible(false);
+                mInvincibilityDelay = 0;
+            }
+        }
+    }
+
+    @Override
+    protected void directionChanged() {
+        if (alive)
+            super.directionChanged();
+    }
+
     protected LivingEntity(final String name, final TextureAtlas atlas, int tileX, int tileY) {super(name,atlas, tileX, tileY);}
 
     boolean alive = true;

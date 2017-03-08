@@ -13,6 +13,7 @@ import com.kekman.game.Entities.Ball;
 import com.kekman.game.Entities.Blinky;
 import com.kekman.game.Entities.CT;
 import com.kekman.game.Entities.Clyde;
+import com.kekman.game.Entities.Definitions.Bonus;
 import com.kekman.game.Entities.Definitions.Entity;
 import com.kekman.game.Entities.Inky;
 import com.kekman.game.Entities.LibgdxExtended.Stage;
@@ -33,6 +34,7 @@ public class GameMap extends Stage {
     private TiledMapTileLayer           mLayer;
     private TiledMap                    mTiledMap;
     private boolean[][]                 mMapColliders;
+    private boolean[][]                 mMapUnavailable;
 
     private Array<Entity>               mEntities = new Array<Entity>();
     private Pacman                      mPacman;
@@ -64,6 +66,8 @@ public class GameMap extends Stage {
         if (instance == null)
             return;
         instance.mEntities.removeValue(entity, true);
+        if (entity instanceof Bonus)
+            instance.mMapUnavailable[entity.getCellY()][entity.getCellX()] = false;
     }
 
     public static float getTileWidth() {
@@ -136,6 +140,8 @@ public class GameMap extends Stage {
     public void addEntity(final Entity entity) {
         mEntities.add(entity);
         addActor(entity);
+        if (entity instanceof Bonus)
+            mMapUnavailable[entity.getCellY()][entity.getCellX()] = true;
     }
 
 
@@ -168,13 +174,26 @@ public class GameMap extends Stage {
         getViewport().setCamera(mCamera);
     }
 
+    private void setAvailableCells() {
+        mMapUnavailable = TilemapUtils.getEmptyCells(mTiledMap);
+        for (int y = 0; y < mMapColliders.length; y++) {
+            boolean yArray[] = mMapColliders[y];
+            int x = 0;
+            for (boolean xValue: yArray) {
+                mMapUnavailable[y][x] = xValue;
+                ++x;
+            }
+        }
+    }
+
     private void loadAssets() {
         if (mTiledMap != null)
             mTiledMap.dispose();
         mTiledMap = mManager.get("map.tmx", TiledMap.class);
         mMapColliders = TilemapUtils.getEmptyCells(mTiledMap);
+        mMapUnavailable = new boolean[mMapColliders.length][mMapColliders[0].length];
+        setAvailableCells();
         mLayer = (TiledMapTileLayer)mTiledMap.getLayers().get(0);
-
         mPacman = new Pacman(mManager.get("sprites.txt", TextureAtlas.class), 11, 11);
         addEntity(mPacman);
         addEntity(new Pinky(mManager.get("sprites.txt", TextureAtlas.class), 21, 1));
@@ -187,6 +206,9 @@ public class GameMap extends Stage {
     public int[] randomEmptyCell() {
         return TilemapUtils.randomEmptyCell(mMapColliders);
     }
+    public int[] randomAvailableCell() {
+        return TilemapUtils.randomEmptyCell(mMapUnavailable);
+    }
 
     public void render(float delta, final SpriteBatch batch) {
         act(delta);
@@ -194,7 +216,7 @@ public class GameMap extends Stage {
     }
 
     public void spawnRandomBonus() {
-        int[] test = randomEmptyCell();
+        int[] test = randomAvailableCell();
         if (test != null) {
             Entity test2 = new CT(mManager.get("sprites.txt", TextureAtlas.class), test[0], test[1]);
             mEntities.add(test2);
@@ -209,11 +231,16 @@ public class GameMap extends Stage {
         draw();
     }
 
+    float timeSinceLastEvent = 0;
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (RandomUtils.randInt(15) == 0)
-            spawnRandomBonus();
+        timeSinceLastEvent += delta;
+        while (timeSinceLastEvent > 1) {
+            --timeSinceLastEvent;
+            if (RandomUtils.randInt(10) == 0)
+                spawnRandomBonus();
+        }
     }
 
     public void goPlayerUp() {
