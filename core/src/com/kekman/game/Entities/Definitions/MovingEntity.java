@@ -126,7 +126,7 @@ public class MovingEntity extends Entity {
         mLastDelta = delta;
     }
 
-    protected void directionChanged() {
+    public void applyDirectionalAnimation() {
         int direction = getDirection();
         switch (direction) {
             case DirectionHandler.UP:
@@ -146,7 +146,11 @@ public class MovingEntity extends Entity {
         }
     }
 
-    protected int getDirection() {return mDirection;}
+    protected void directionChanged() {
+        applyDirectionalAnimation();
+    }
+
+    public int getDirection() {return mDirection;}
 
     protected void changeDirection(final int direction) {
         if (mDirection == direction)

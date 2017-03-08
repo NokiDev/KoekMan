@@ -23,6 +23,8 @@ public class Enemy extends LivingEntity {
         mWeak = weak;
         if (weak)
             setAnimation("weak", true);
+        else
+            applyDirectionalAnimation();
     }
 
     @Override
