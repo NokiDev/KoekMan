@@ -2,7 +2,7 @@ package com.kekman.game.Entities.Definitions;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.kekman.game.Entities.LibgdxExtended.Actor;
 import com.kekman.game.Map.GameMap;
 import com.kekman.game.Tools.Animations.Animations;
 import com.kekman.game.Tools.Tilemap.TilemapUtils;
@@ -14,6 +14,9 @@ import com.kekman.game.Tools.Tilemap.TilemapUtils;
 public class Entity extends Actor {
     protected final int DEFAULT_WIDTH = 30;
     protected final int DEFAULT_HEIGHT = 30;
+    protected final int BONUS_ZINDEX = 2;
+    protected final int PLAYER_ZINDEX = 1;
+    protected final int ENEMY_ZINDEX = 0;
 
     protected Entity(final String name, final TextureAtlas atlas, int tileX, int tileY) {
         setName(name);

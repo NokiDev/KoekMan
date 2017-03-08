@@ -1,6 +1,7 @@
 package com.kekman.game.Entities.Definitions;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.kekman.game.Entities.LibgdxExtended.Stage;
 import com.kekman.game.Map.GameMap;
 import com.kekman.game.Tools.CollisionDetector.CollisionDetector;
 
@@ -10,6 +11,7 @@ import com.kekman.game.Tools.CollisionDetector.CollisionDetector;
 
 public class Player extends MovingEntity {
     protected Player(final String name, final TextureAtlas atlas, int tileX, int tileY) {super(name,atlas, tileX, tileY);}
+    public void actorAdded(final Stage stage) {setZIndex(PLAYER_ZINDEX);}
 
     @Override
     public void act(float delta) {
