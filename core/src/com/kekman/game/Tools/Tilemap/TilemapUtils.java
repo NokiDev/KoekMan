@@ -102,7 +102,6 @@ public class TilemapUtils {
                 }
             }
         }
-        printBoolArrayArray(array);
         return array;
     }
 

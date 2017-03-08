@@ -161,10 +161,10 @@ public class GameMap extends Stage {
         mEntities.add(mClyde);
         mEntities.add(mInky);
         addActor(mPacman);
-//        addActor(mPinky);
-//        addActor(mBlinky);
-//        addActor(mClyde);
-//        addActor(mInky);
+        addActor(mPinky);
+        addActor(mBlinky);
+        addActor(mClyde);
+        addActor(mInky);
     }
 
     public int[] randomEmptyCell() {
@@ -179,7 +179,6 @@ public class GameMap extends Stage {
     public void spawnRandomBonus() {
         int[] test = randomEmptyCell();
         if (test != null) {
-//            System.out.println("(" + test[0] + ", " + test[1] + ")");
             Entity test2 = new Ball(mManager.get("sprites.txt", TextureAtlas.class), test[0], test[1]);
             mEntities.add(test2);
             addActor(test2);

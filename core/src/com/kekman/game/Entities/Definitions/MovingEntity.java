@@ -170,7 +170,7 @@ public class MovingEntity extends Entity {
 
     protected int getDirection() {return mDirection;}
 
-    private void changeDirection(final int direction) {
+    protected void changeDirection(final int direction) {
         if (mDirection == direction)
             return;
         if (direction != DirectionHandler.UNKNOWN &&
