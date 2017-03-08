@@ -58,13 +58,19 @@ public class MovingEntity extends Entity {
             if ((!upWasAvailable && up) || (!downWasAvailable && down) ||
                     (!leftWasAvailable && left) || (!rightWasAvailable && right)) {
                 onIntersection(up, down, left, right, mDirection);
+                if (this instanceof Player) {
+                    if (canGoDirection(mNextDirection, remainingDistance))
+                        changeDirection(mNextDirection);
+//                    System.out.println("Intersection !");
+                }
             }
             upWasAvailable = up;
             downWasAvailable = down;
             leftWasAvailable = left;
             rightWasAvailable = right;
         }
-        moveBy(x, y);
+        else
+            moveBy(x, y);
     }
 
     private void applyDirection(float speed) {

@@ -132,10 +132,10 @@ public class GameMap extends Stage {
         cameraUpdated();
     }
 
-    protected void onResize(int width, int height, final Viewport viewport) {
+//    protected void onResize(int width, int height, final Viewport viewport) {
 //        setCamera(v);
 //        tiledMapRenderer.setView(viewport.getCamera());
-    }
+//    }
 
     private void cameraUpdated() {
         int w = mLayer.getWidth();

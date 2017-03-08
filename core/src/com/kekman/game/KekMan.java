@@ -40,7 +40,7 @@ public class KekMan extends Game {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height, true);
+//        viewport.update(width, height, true);
         batch.setProjectionMatrix(viewport.getCamera().combined);
         shapeRenderer.setProjectionMatrix(viewport.getCamera().combined);
         onResize(width, height, viewport);

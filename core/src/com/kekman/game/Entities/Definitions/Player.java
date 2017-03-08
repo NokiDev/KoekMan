@@ -14,7 +14,7 @@ public class Player extends LivingEntity {
 
     protected Player(final String name, final TextureAtlas atlas, int tileX, int tileY) {
         super(name,atlas, tileX, tileY);
-        setSpeed(getSpeed() * 2);
+        setSpeed(getSpeed() * 1.2f);
     }
     public void actorAdded(final Stage stage) {setZIndex(PLAYER_ZINDEX);}
 
@@ -34,10 +34,6 @@ public class Player extends LivingEntity {
             else
                 die();
         }
-    }
-
-    public void onCollision(boolean upAvailable, boolean downAvailable,
-                            boolean leftAvailable, boolean rightAvailable) {
     }
 
     @Override
