@@ -12,6 +12,5 @@ public class Pacman extends Player {
 
     public Pacman(final TextureAtlas atlas, int tileX, int tileY) {
         super(name, atlas, tileX, tileY);
-        setSpeed(getSpeed() * 10);
     }
 }
