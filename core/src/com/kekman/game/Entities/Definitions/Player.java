@@ -14,6 +14,7 @@ public class Player extends LivingEntity {
 
     protected Player(final String name, final TextureAtlas atlas, int tileX, int tileY) {
         super(name,atlas, tileX, tileY);
+        setSpeed(getSpeed() * 2);
     }
     public void actorAdded(final Stage stage) {setZIndex(PLAYER_ZINDEX);}
 
@@ -26,6 +27,7 @@ public class Player extends LivingEntity {
     @Override
     public void onCollision(final Entity collider) {
         super.onCollision(collider);
+        System.out.println("Collision");
         if (collider instanceof Enemy) {
             if (immortal)
                 ((Enemy) collider).die();

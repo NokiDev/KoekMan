@@ -20,6 +20,7 @@ public class MovingEntity extends Entity {
     private float       mSpeed = 100;
 
     protected void setSpeed(float speed) {mSpeed = speed;}
+    protected float getSpeed() {return mSpeed;}
 
     boolean upWasAvailable = false;
     boolean downWasAvailable = false;
