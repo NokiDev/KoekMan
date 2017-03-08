@@ -40,6 +40,7 @@ public class MovingEntity extends Entity {
             if (mDirection == DirectionHandler.UNKNOWN) {
                 final TiledMap map = GameMap.getTilesMap();
                 if (map != null) {
+                    System.out.println("Position of collision: ("+getCellX()+", "+getCellY()+")");
                     setCell(getCellX(), getCellY());
                     onCollision(canGoUp(map, mSpeed * delta), canGoDown(map, mSpeed * delta),
                             canGoLeft(map, mSpeed * delta), canGoRight(map, mSpeed * delta));
@@ -184,10 +185,12 @@ public class MovingEntity extends Entity {
                             boolean leftAvailable, boolean rightAvailable) {}
 
     public int getCellX() {
-        return (int)(getX() / GameMap.getTileWidth());
+        return (int)(getX() / GameMap.getTileWidth() +
+                (((getX() % GameMap.getTileWidth()) != 0) ? 1 : 0));
     }
 
     public int getCellY() {
-        return (int)(getY() / GameMap.getTileHeight());
+        return (int)(getY() / GameMap.getTileHeight() +
+                (((getY() % GameMap.getTileHeight()) != 0) ? 1 : 0));
     }
 }

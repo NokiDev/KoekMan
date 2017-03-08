@@ -12,8 +12,8 @@ import com.kekman.game.Tools.Tilemap.TilemapUtils;
  */
 
 public class Entity extends Actor {
-    protected final int DEFAULT_WIDTH = 30;
-    protected final int DEFAULT_HEIGHT = 30;
+    protected final int DEFAULT_WIDTH = 32;
+    protected final int DEFAULT_HEIGHT = 32;
     protected final int BONUS_ZINDEX = 2;
     protected final int PLAYER_ZINDEX = 1;
     protected final int ENEMY_ZINDEX = 0;
