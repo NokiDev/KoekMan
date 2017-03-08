@@ -78,4 +78,21 @@ public class DirectionHandler {
                 return new Ternary(Ternary.UNKNOWN);
         }
     }
+
+    public static String getDirectionName(int direction) {
+        switch (direction) {
+            case DirectionHandler.UP:
+                return "UP";
+            case DirectionHandler.DOWN:
+                return "DOWN";
+            case DirectionHandler.LEFT:
+                return "LEFT";
+            case DirectionHandler.RIGHT:
+                return "RIGHT";
+            case DirectionHandler.UNKNOWN:
+                return "UNKNOWN";
+            default:
+                return "default";
+        }
+    }
 }

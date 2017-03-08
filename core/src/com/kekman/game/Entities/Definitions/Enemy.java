@@ -2,6 +2,7 @@ package com.kekman.game.Entities.Definitions;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.kekman.game.Entities.LibgdxExtended.Stage;
+import com.kekman.game.Entities.Pinky;
 import com.kekman.game.Tools.Keyboard.DirectionHandler;
 import com.kekman.game.Tools.Random.RandomUtils;
 
@@ -28,15 +29,41 @@ public class Enemy extends MovingEntity {
             changeDirection(DirectionHandler.RIGHT);
     }
 
-    @Override
-    public void onCollision(boolean upAvailable, boolean downAvailable,
-                               boolean leftAvailable, boolean rightAvailable) {
+    protected void changeNewRandomDirection(boolean upAvailable, boolean downAvailable,
+                                            boolean leftAvailable, boolean rightAvailable, int direction) {
+        if (this instanceof Pinky) {
+            System.out.println("Remove "+DirectionHandler.getDirectionName(direction));
+        }
+        switch (direction) {
+            case DirectionHandler.UP:
+                downAvailable = false;
+                break;
+            case DirectionHandler.DOWN:
+                upAvailable = false;
+                break;
+            case DirectionHandler.LEFT:
+                rightAvailable = false;
+                break;
+            case DirectionHandler.RIGHT:
+                leftAvailable = false;
+                break;
+            default:
+                break;
+        }
         changeRandomDirection(upAvailable, downAvailable, leftAvailable, rightAvailable);
     }
 
     @Override
+    public void onCollision(boolean upAvailable, boolean downAvailable,
+                               boolean leftAvailable, boolean rightAvailable, int direction) {
+//        changeNewRandomDirection(upAvailable, downAvailable, leftAvailable, rightAvailable, direction);
+    }
+
+    @Override
     public void onIntersection(boolean upAvailable, boolean downAvailable,
-                               boolean leftAvailable, boolean rightAvailable) {
-        changeRandomDirection(upAvailable, downAvailable, leftAvailable, rightAvailable);
+                               boolean leftAvailable, boolean rightAvailable, int direction) {
+        if (this instanceof Pinky)
+            System.out.println("Received intersection !");
+        changeNewRandomDirection(upAvailable, downAvailable, leftAvailable, rightAvailable, direction);
     }
 }

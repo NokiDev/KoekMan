@@ -19,83 +19,59 @@ public class MovingEntity extends Entity {
     private int         mNextDirection = DirectionHandler.UNKNOWN;
     private int         mSpeed = 100;
 
+    boolean upWasAvailable = false;
+    boolean downWasAvailable = false;
+    boolean leftWasAvailable = false;
+    boolean rightWasAvailable = false;
     private void moveEntity(float x, float y) {
-        if (this instanceof Player) {
-            float tileWidth = GameMap.getTileWidth();
-            float tileHeight = GameMap.getTileHeight();
+        float tileWidth = GameMap.getTileWidth();
+        float tileHeight = GameMap.getTileHeight();
 
-            float posX = (getX() % tileWidth);
-            float nextPosX = posX + x;
-            float posY = (getY() % tileHeight);
-            float nextPosY = posY + y;
+        float posX = (getX() % tileWidth);
+        float nextPosX = posX + x;
+        float posY = (getY() % tileHeight);
+        float nextPosY = posY + y;
 
-            boolean onCenter = false;
-            if (posX < tileWidth != nextPosX < tileWidth) {
-                float offset = tileWidth - posX;
-                setX(getX() + offset);
-                x -= offset;
-                onCenter = true;
-            }
-            if (posY < tileHeight != nextPosY < tileHeight) {
-                float offset = tileHeight - posY;
-                setY(getY() + offset);
-                y -= offset;
-                onCenter = true;
-            }
-
-//            if (posX < tileWidth && nextPosX > tileWidth) {
-//                float offset = tileWidth - posX;
-//                setX(getX() + offset);
-//                x -= offset;
-//                onCenter = true;
-//            } else if (posX > tileWidth && nextPosX < tileWidth) {
-//                float offset = tileWidth - posX;
-//                setX(getX() + offset);
-//                x -= offset;
-//                onCenter = true;
-//            }
-//            if (posY < tileHeight && nextPosY > tileHeight) {
-//                float offset = tileHeight - posY;
-//                setY(getY() + offset);
-//                y -= offset;
-//                onCenter = true;
-//            } else if (posY > tileHeight && nextPosY < tileHeight) {
-//                float offset = tileHeight - posY;
-//                setY(getY() + offset);
-//                y -= offset;
-//                onCenter = true;
-//            }
-            if (onCenter) {
-                float remainingDistance = (float)Math.sqrt(x * x + y * y);
-                boolean up = canGoUp(remainingDistance);
-                boolean down = canGoUp(remainingDistance);
-                boolean left = canGoUp(remainingDistance);
-                boolean right = canGoUp(remainingDistance);
-                if (up || down || left || right)
-                    onIntersection(up, down, left, right);
-            }
+        boolean onCenter = false;
+        if (posX < tileWidth != nextPosX < tileWidth) {
+            float offset = tileWidth - posX;
+            setX(getX() + offset);
+            x -= offset;
+            onCenter = true;
         }
-//        if (this instanceof Player) {
-//            System.out.println("moveby "+x+" "+y);
-//        }
+        if (posY < tileHeight != nextPosY < tileHeight) {
+            float offset = tileHeight - posY;
+            setY(getY() + offset);
+            y -= offset;
+            onCenter = true;
+        }
+        if (onCenter) {
+            float remainingDistance = (float)Math.sqrt(x * x + y * y);
+            boolean up = canGoUp(remainingDistance);
+            boolean down = canGoUp(remainingDistance);
+            boolean left = canGoUp(remainingDistance);
+            boolean right = canGoUp(remainingDistance);
+
+            if (y > 0)
+                down = false;
+            else if (y < 0)
+                up = false;
+            if (x > 0)
+                left = false;
+            else if (x < 0)
+                right = false;
+//            if (this instanceof Pinky) {
+//                System.out.println("HELLO");
+//            }
+            if ((!upWasAvailable && up) || (!downWasAvailable && down) ||
+                    (!leftWasAvailable && left) || (!rightWasAvailable && right))
+                onIntersection(up, down, left, right, mDirection);
+            upWasAvailable = up;
+            downWasAvailable = down;
+            leftWasAvailable = left;
+            rightWasAvailable = right;
+        }
         moveBy(x, y);
-    }
-
-    public static String getDirectionName(int direction) {
-        switch (direction) {
-            case DirectionHandler.UP:
-                return "UP";
-            case DirectionHandler.DOWN:
-                return "DOWN";
-            case DirectionHandler.LEFT:
-                return "LEFT";
-            case DirectionHandler.RIGHT:
-                return "RIGHT";
-            case DirectionHandler.UNKNOWN:
-                return "UNKNOWN";
-            default:
-                return "default";
-        }
     }
 
     private void applyDirection(float speed) {
@@ -138,10 +114,13 @@ public class MovingEntity extends Entity {
             }
             else if (!canGoDirection(mDirection, mSpeed * delta)) {
                 setCell(getCellX(), getCellY());
+                int oldDirection = mDirection;
                 changeDirection(mNextDirection);
                 mNextDirection = DirectionHandler.UNKNOWN;
                 onCollision(canGoUp(mSpeed * delta), canGoDown(mSpeed * delta),
-                        canGoLeft(mSpeed * delta), canGoRight(mSpeed * delta));
+                        canGoLeft(mSpeed * delta), canGoRight(mSpeed * delta), oldDirection);
+                onIntersection(canGoUp(mSpeed * delta), canGoDown(mSpeed * delta),
+                        canGoLeft(mSpeed * delta), canGoRight(mSpeed * delta), oldDirection);
             }
         }
         applyDirection(mSpeed * delta);
@@ -177,6 +156,7 @@ public class MovingEntity extends Entity {
                 !canGoDirection(direction, mSpeed * mLastDelta))
             return;
         mDirection = direction;
+        mNextDirection = DirectionHandler.UNKNOWN;
         directionChanged();
     }
 
@@ -261,10 +241,10 @@ public class MovingEntity extends Entity {
     }
 
     public void onCollision(boolean upAvailable, boolean downAvailable,
-                            boolean leftAvailable, boolean rightAvailable) {}
+                            boolean leftAvailable, boolean rightAvailable, int direction) {}
 
     public void onIntersection(boolean upAvailable, boolean downAvailable,
-                            boolean leftAvailable, boolean rightAvailable) {
+                            boolean leftAvailable, boolean rightAvailable, int direction) {
         switch (mNextDirection) {
             case DirectionHandler.UP:
                 if (upAvailable)
