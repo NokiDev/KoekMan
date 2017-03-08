@@ -54,12 +54,13 @@ public class Keyboard extends GestureDetector.GestureAdapter implements InputPro
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        System.out.println(screenX + "-" + screenY + " / " + pointer);
+        //System.out.println("DRAGGED : " + screenX + "-" + screenY + " / " + pointer);
         return false;
     }
 
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
+        System.out.println("FLING : " + velocityX + "-" + velocityY);
         if(Math.abs(velocityX)>Math.abs(velocityY)){
             if(velocityX>0){
                 mLastKey = Input.Keys.RIGHT;
