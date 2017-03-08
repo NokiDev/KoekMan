@@ -20,11 +20,14 @@ public class Bonus extends StaticEntity {
     public void setValue(int value) {mValue = value;}
     public int getValue() {return mValue;}
 
+    protected void bonusRemoved() {}
+
     public void applyBonus(final Entity entity) {
         if (entity instanceof Player) {
             Score.AddScore(mValue);
             remove();
             GameMap.removeEntity(this);
+            bonusRemoved();
         }
     }
 }

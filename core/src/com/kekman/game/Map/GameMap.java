@@ -47,6 +47,16 @@ public class GameMap extends Stage {
 
     private TiledMapRenderer tiledMapRenderer;
 
+    public static void checkWin() {
+        if (instance == null)
+            return;
+        for (int i=0; i < instance.mEntities.size; i++) {
+            final Entity entity = instance.mEntities.get(i);
+//            if (entity instanceof Enemy)
+//                ((Enemy) entity).setWeak(weak);
+        }
+    }
+
     public static GameMap getInstance() {
         return instance;
     }
