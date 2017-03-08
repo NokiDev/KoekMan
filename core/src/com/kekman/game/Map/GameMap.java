@@ -132,6 +132,24 @@ public class GameMap extends Stage {
         cameraUpdated();
     }
 
+    public void addEntity(final Entity entity) {
+        mEntities.add(entity);
+        addActor(entity);
+    }
+
+
+    public void fillWithDots() {
+        for (int y = 0; y < mMapColliders.length; y++) {
+            boolean yArray[] = mMapColliders[y];
+            int x = 0;
+            for (boolean xValue: yArray) {
+                if (!xValue)
+                    addEntity(new Ball(mManager.get("sprites.txt", TextureAtlas.class), x, y));
+                ++x;
+            }
+        }
+    }
+
 //    protected void onResize(int width, int height, final Viewport viewport) {
 //        setCamera(v);
 //        tiledMapRenderer.setView(viewport.getCamera());
@@ -157,20 +175,12 @@ public class GameMap extends Stage {
         mLayer = (TiledMapTileLayer)mTiledMap.getLayers().get(0);
 
         mPacman = new Pacman(mManager.get("sprites.txt", TextureAtlas.class), 1, 1);
-        mPinky = new Pinky(mManager.get("sprites.txt", TextureAtlas.class), 10, 1);
-        mBlinky = new Blinky(mManager.get("sprites.txt", TextureAtlas.class), 10, 1);
-        mClyde = new Clyde(mManager.get("sprites.txt", TextureAtlas.class), 10, 1);
-        mInky = new Inky(mManager.get("sprites.txt", TextureAtlas.class), 10, 1);
-        mEntities.add(mPacman);
-        mEntities.add(mPinky);
-        mEntities.add(mBlinky);
-        mEntities.add(mClyde);
-        mEntities.add(mInky);
-        addActor(mPacman);
-        addActor(mPinky);
-        addActor(mBlinky);
-        addActor(mClyde);
-        addActor(mInky);
+        addEntity(mPacman);
+        addEntity(new Pinky(mManager.get("sprites.txt", TextureAtlas.class), 10, 1));
+        addEntity(new Blinky(mManager.get("sprites.txt", TextureAtlas.class), 10, 1));
+        addEntity(new Clyde(mManager.get("sprites.txt", TextureAtlas.class), 10, 1));
+        addEntity(new Inky(mManager.get("sprites.txt", TextureAtlas.class), 10, 1));
+        fillWithDots();
     }
 
     public int[] randomEmptyCell() {

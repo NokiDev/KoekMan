@@ -27,7 +27,6 @@ public class Player extends LivingEntity {
     @Override
     public void onCollision(final Entity collider) {
         super.onCollision(collider);
-        System.out.println("Collision");
         if (collider instanceof Enemy) {
             if (immortal)
                 ((Enemy) collider).die();

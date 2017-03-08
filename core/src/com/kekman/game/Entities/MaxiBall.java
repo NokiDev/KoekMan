@@ -8,8 +8,10 @@ import com.kekman.game.Entities.Definitions.Bonus;
  */
 
 public class MaxiBall extends Bonus {
-    static public final String name = "clyde";
+    static public final String  name = "clyde";
+    static public final int     value = 50;
+
     public MaxiBall(final TextureAtlas atlas, int tileX, int tileY) {
-        super("blinky", atlas, tileX, tileY);
+        super("blinky", atlas, tileX, tileY, value);
     }
 }
