@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kekman.game.Entities.Ball;
 import com.kekman.game.Entities.Blinky;
+import com.kekman.game.Entities.CT;
 import com.kekman.game.Entities.Clyde;
 import com.kekman.game.Entities.Definitions.Entity;
 import com.kekman.game.Entities.Inky;
@@ -174,12 +175,12 @@ public class GameMap extends Stage {
         mMapColliders = TilemapUtils.getEmptyCells(mTiledMap);
         mLayer = (TiledMapTileLayer)mTiledMap.getLayers().get(0);
 
-        mPacman = new Pacman(mManager.get("sprites.txt", TextureAtlas.class), 1, 1);
+        mPacman = new Pacman(mManager.get("sprites.txt", TextureAtlas.class), 11, 11);
         addEntity(mPacman);
-        addEntity(new Pinky(mManager.get("sprites.txt", TextureAtlas.class), 10, 1));
-        addEntity(new Blinky(mManager.get("sprites.txt", TextureAtlas.class), 10, 1));
-        addEntity(new Clyde(mManager.get("sprites.txt", TextureAtlas.class), 10, 1));
-        addEntity(new Inky(mManager.get("sprites.txt", TextureAtlas.class), 10, 1));
+        addEntity(new Pinky(mManager.get("sprites.txt", TextureAtlas.class), 21, 1));
+        addEntity(new Blinky(mManager.get("sprites.txt", TextureAtlas.class), 1, 1));
+        addEntity(new Clyde(mManager.get("sprites.txt", TextureAtlas.class), 1, 21));
+        addEntity(new Inky(mManager.get("sprites.txt", TextureAtlas.class), 21, 21));
         fillWithDots();
     }
 
@@ -195,7 +196,7 @@ public class GameMap extends Stage {
     public void spawnRandomBonus() {
         int[] test = randomEmptyCell();
         if (test != null) {
-            Entity test2 = new Ball(mManager.get("sprites.txt", TextureAtlas.class), test[0], test[1]);
+            Entity test2 = new CT(mManager.get("sprites.txt", TextureAtlas.class), test[0], test[1]);
             mEntities.add(test2);
             addActor(test2);
         }
@@ -211,7 +212,7 @@ public class GameMap extends Stage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (RandomUtils.randInt(5000) == 0)
+        if (RandomUtils.randInt(15) == 0)
             spawnRandomBonus();
     }
 

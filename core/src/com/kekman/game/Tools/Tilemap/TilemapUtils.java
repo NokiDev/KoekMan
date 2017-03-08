@@ -113,6 +113,8 @@ public class TilemapUtils {
                     ++numberOfPossibilities;
             }
         }
+        if (numberOfPossibilities == 0)
+            return null;
         int cell = RandomUtils.randInt(numberOfPossibilities - 1);
         for (int y = 0; y < array.length; y++) {
             boolean yArray[] = array[y];
