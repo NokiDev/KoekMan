@@ -4,15 +4,23 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Vector;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * Created by elytum on 06/03/2017.
  */
 
-public class Keyboard extends GestureDetector.GestureAdapter implements InputProcessor {
+public class Keyboard implements InputProcessor {
     private int mLastKey = Input.Keys.UNKNOWN;
 
+    private boolean dragging = false;
+    private int dragStartX = 0;
+    private int dragStartY = 0;
+
+
     public void setInputProcessor() {
+        //Gdx.input.setInputProcessor(new GestureDetector(20, 0.5f, 2, 0.15f,this));
         Gdx.input.setInputProcessor(this);
     }
 
@@ -43,38 +51,46 @@ public class Keyboard extends GestureDetector.GestureAdapter implements InputPro
     }
 
     @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
+    public boolean touchDown(int screenX, int screenY, int pointer, int button)
+    {
+        if(pointer>0) return false;
+        dragging = true;
+        dragStartX = screenX;
+        dragStartY = screenY;
+        return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
+        if(pointer>0) return false;
+        dragging = false;
+        dragStartX = 0;
+        dragStartY = 0;
+        return true;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        //System.out.println("DRAGGED : " + screenX + "-" + screenY + " / " + pointer);
-        return false;
-    }
-
-    @Override
-    public boolean fling(float velocityX, float velocityY, int button) {
-        System.out.println("FLING : " + velocityX + "-" + velocityY);
-        if(Math.abs(velocityX)>Math.abs(velocityY)){
-            if(velocityX>0){
-                mLastKey = Input.Keys.RIGHT;
+        if(!dragging) return false;
+        int velocityX =  screenX - dragStartX;
+        int velocityY = screenY - dragStartY;
+        if(Math.abs(velocityX) + Math.abs(velocityY) > 20){
+            if(Math.abs(velocityX)>Math.abs(velocityY)){
+                if(velocityX>0){
+                    mLastKey = Input.Keys.RIGHT;
+                }else{
+                    mLastKey = Input.Keys.LEFT;
+                }
             }else{
-                mLastKey = Input.Keys.LEFT;
-            }
-        }else{
-            if(velocityY>0){
-                mLastKey = Input.Keys.DOWN;
-            }else{
-                mLastKey = Input.Keys.UP;
+                if(velocityY>0){
+                    mLastKey = Input.Keys.DOWN;
+                }else{
+                    mLastKey = Input.Keys.UP;
+                }
             }
         }
-        return super.fling(velocityX, velocityY, button);
+        //System.out.println("DRAGGED : " + screenX + "-" + screenY + " / " + pointer);
+        return false;
     }
 
     @Override
