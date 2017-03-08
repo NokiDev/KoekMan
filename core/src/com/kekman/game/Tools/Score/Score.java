@@ -12,6 +12,6 @@ public class Score {
     }
     public static void AddScore(int diff) {
         score += diff;
-        System.out.println("Score: "+Score.getScore());
+        Logic.scoreChanged(score);
     }
 }
