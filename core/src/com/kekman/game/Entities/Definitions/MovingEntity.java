@@ -29,6 +29,8 @@ public class MovingEntity extends Entity {
         if (tiledMap != null &&
                 (mDirection != DirectionHandler.UNKNOWN ||
                         mNextDirection != DirectionHandler.UNKNOWN)) {
+            if (mDirection == DirectionHandler.UNKNOWN)
+                mDirection = mNextDirection;
             if (canGoDirection(tiledMap, mNextDirection, mSpeed * delta)) {
                 changeDirection(mNextDirection);
                 mNextDirection = DirectionHandler.UNKNOWN;
@@ -36,14 +38,13 @@ public class MovingEntity extends Entity {
             else if (!canGoDirection(tiledMap, mDirection, mSpeed * delta)) {
                 changeDirection(DirectionHandler.UNKNOWN);
                 mNextDirection = DirectionHandler.UNKNOWN;
-            }
-            if (mDirection == DirectionHandler.UNKNOWN) {
                 final TiledMap map = GameMap.getTilesMap();
                 if (map != null) {
-                    System.out.println("Position of collision: ("+getCellX()+", "+getCellY()+")");
+                    if (this instanceof Player)
+                        System.out.println("Position of collision: ("+getCellX()+", "+getCellY()+")");
                     setCell(getCellX(), getCellY());
-                    onCollision(canGoUp(map, mSpeed * delta), canGoDown(map, mSpeed * delta),
-                            canGoLeft(map, mSpeed * delta), canGoRight(map, mSpeed * delta));
+//                    onCollision(canGoUp(map, mSpeed * delta), canGoDown(map, mSpeed * delta),
+//                            canGoLeft(map, mSpeed * delta), canGoRight(map, mSpeed * delta));
                 }
             }
         }
@@ -185,12 +186,10 @@ public class MovingEntity extends Entity {
                             boolean leftAvailable, boolean rightAvailable) {}
 
     public int getCellX() {
-        return (int)(getX() / GameMap.getTileWidth() +
-                (((getX() % GameMap.getTileWidth()) != 0) ? 1 : 0));
+        return (int)((getX() + getWidth() / 2) / GameMap.getTileWidth());
     }
 
     public int getCellY() {
-        return (int)(getY() / GameMap.getTileHeight() +
-                (((getY() % GameMap.getTileHeight()) != 0) ? 1 : 0));
+        return (int)((getY() + getHeight() / 2) / GameMap.getTileHeight());
     }
 }
