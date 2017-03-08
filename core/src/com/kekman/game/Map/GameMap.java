@@ -14,6 +14,7 @@ import com.kekman.game.Entities.Blinky;
 import com.kekman.game.Entities.CT;
 import com.kekman.game.Entities.Clyde;
 import com.kekman.game.Entities.Definitions.Bonus;
+import com.kekman.game.Entities.Definitions.Enemy;
 import com.kekman.game.Entities.Definitions.Entity;
 import com.kekman.game.Entities.Inky;
 import com.kekman.game.Entities.LibgdxExtended.Stage;
@@ -165,7 +166,6 @@ public class GameMap extends Stage {
     private void cameraUpdated() {
         int w = mLayer.getWidth();
         int h = mLayer.getHeight();
-        System.out.print(w + "+" + h);
         mCamera.setToOrtho(false,w*32,h*32);
 
         tiledMapRenderer = new TextureMapObjectRenderer(mTiledMap);//new OrthogonalTiledMapRenderer(mTiledMap);
@@ -238,7 +238,7 @@ public class GameMap extends Stage {
         timeSinceLastEvent += delta;
         while (timeSinceLastEvent > 1) {
             --timeSinceLastEvent;
-            if (RandomUtils.randInt(10) == 0)
+            if (RandomUtils.randInt(1) == 0)
                 spawnRandomBonus();
         }
     }
@@ -257,5 +257,26 @@ public class GameMap extends Stage {
 
     public void goPlayerRight() {
         mPacman.setDirectionRight();
+    }
+
+    public void setEnemiesWeak(boolean weak) {
+        for (int i=0; i < mEntities.size; i++) {
+            final Entity entity = mEntities.get(i);
+            if (entity instanceof Enemy)
+                ((Enemy) entity).setWeak(weak);
+        }
+    }
+
+    int mTotalInvincible;
+    public static void invinciblePlayer(boolean invincible) {
+        if (instance == null)
+            return;
+        if (invincible) {
+            ++instance.mTotalInvincible;
+            instance.setEnemiesWeak(true);
+        } else {
+            if (--instance.mTotalInvincible == 0)
+                instance.setEnemiesWeak(false);
+        }
     }
 }

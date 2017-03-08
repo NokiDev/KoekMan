@@ -1,4 +1,4 @@
-package com.kekman.game.Entities.Definitions;
+package com.kekman.game.Tools.Score;
 
 /**
  * Created by elytum on 08/03/2017.

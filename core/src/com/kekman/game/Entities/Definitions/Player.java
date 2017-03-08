@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.kekman.game.Entities.LibgdxExtended.Stage;
 import com.kekman.game.Map.GameMap;
 import com.kekman.game.Tools.CollisionDetector.CollisionDetector;
+import com.kekman.game.Tools.Score.Logic;
 
 /**
  * Created by elytum on 07/03/2017.

@@ -14,6 +14,24 @@ public class Enemy extends LivingEntity {
     protected Enemy(final String name, final TextureAtlas atlas, int tileX, int tileY) {super(name,atlas, tileX, tileY);}
     public void actorAdded(final Stage stage) {setZIndex(ENEMY_ZINDEX);}
 
+    private boolean mWeak = false;
+
+    public boolean  isWeak() {return mWeak;}
+    public void     setWeak(boolean weak) {
+        if (mWeak == weak)
+            return;
+        mWeak = weak;
+        if (weak)
+            setAnimation("weak", true);
+    }
+
+    @Override
+    public void setAnimation(final String animation) {
+        if (mWeak && !animation.equals("weak"))
+            return;
+        super.setAnimation(animation);
+    }
+
     protected void changeRandomDirection(boolean upAvailable, boolean downAvailable,
                                          boolean leftAvailable, boolean rightAvailable) {
         int possibilities = (upAvailable ? 1 : 0) + (downAvailable ? 1 : 0) +

@@ -1,6 +1,7 @@
 package com.kekman.game.Entities.Definitions;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.kekman.game.Map.GameMap;
 
 /**
  * Created by elytum on 08/03/2017.
@@ -15,10 +16,12 @@ public class LivingEntity extends MovingEntity {
     private void setInvincible(boolean invincible) {
         if (mInvincible == invincible)
             return;
-        System.out.println("Invincible: "+invincible);
         mInvincible = invincible;
         if (!mInvincible)
             mInvincibilityDelay = 0;
+        if (this instanceof Player) {
+            GameMap.invinciblePlayer(mInvincible);
+        }
     }
 
     public void setInvincible(float delay) {
