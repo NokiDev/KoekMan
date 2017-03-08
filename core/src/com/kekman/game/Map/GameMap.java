@@ -59,6 +59,18 @@ public class GameMap extends Stage {
         return instance.mEntities;
     }
 
+    public static float getTileWidth() {
+        if (instance == null)
+            return 0;
+        return TilemapUtils.getTileWidth(instance.mTiledMap);
+    }
+
+    public static float getTileHeight() {
+        if (instance == null)
+            return 0;
+        return TilemapUtils.getTileHeight(instance.mTiledMap);
+    }
+
     public GameMap(final AssetManager manager, final Viewport viewport) {
         super(viewport);
         instance = this;

@@ -23,9 +23,14 @@ public class Player extends MovingEntity {
     public void onCollision(final Entity collider) {
         super.onCollision(collider);
         if (collider instanceof Enemy) {
-            System.out.println("DIE");
+            ;//            System.out.println("DIE");
         } else if (collider instanceof Bonus) {
             System.out.println("EAT BONUS");
         }
+    }
+
+    public void onCollision(boolean upAvailable, boolean downAvailable,
+                            boolean leftAvailable, boolean rightAvailable) {
+        System.out.println("Collision: "+upAvailable+" "+downAvailable+" "+leftAvailable+" "+rightAvailable);
     }
 }

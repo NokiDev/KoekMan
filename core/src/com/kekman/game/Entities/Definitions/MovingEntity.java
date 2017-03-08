@@ -26,7 +26,9 @@ public class MovingEntity extends Entity {
     public void act(float delta) {
         super.act(delta);
         final TiledMap tiledMap = GameMap.getTilesMap();
-        if (tiledMap != null) {
+        if (tiledMap != null &&
+                (mDirection != DirectionHandler.UNKNOWN ||
+                        mNextDirection != DirectionHandler.UNKNOWN)) {
             if (canGoDirection(tiledMap, mNextDirection, mSpeed * delta)) {
                 changeDirection(mNextDirection);
                 mNextDirection = DirectionHandler.UNKNOWN;
@@ -34,6 +36,14 @@ public class MovingEntity extends Entity {
             else if (!canGoDirection(tiledMap, mDirection, mSpeed * delta)) {
                 changeDirection(DirectionHandler.UNKNOWN);
                 mNextDirection = DirectionHandler.UNKNOWN;
+            }
+            if (mDirection == DirectionHandler.UNKNOWN) {
+                final TiledMap map = GameMap.getTilesMap();
+                if (map != null) {
+                    setCell(getCellX(), getCellY());
+                    onCollision(canGoUp(map, mSpeed * delta), canGoDown(map, mSpeed * delta),
+                            canGoLeft(map, mSpeed * delta), canGoRight(map, mSpeed * delta));
+                }
             }
         }
         switch (mDirection) {
@@ -87,6 +97,8 @@ public class MovingEntity extends Entity {
     protected int getDirection() {return mDirection;}
 
     private void changeDirection(final int direction) {
+        if (mDirection == direction)
+            return;
         mDirection = direction;
         directionChanged();
     }
@@ -163,5 +175,19 @@ public class MovingEntity extends Entity {
         else
             changeDirection(DirectionHandler.RIGHT);
         return true;
+    }
+
+    public void onCollision(boolean upAvailable, boolean downAvailable,
+                            boolean leftAvailable, boolean rightAvailable) {}
+
+    public void onIntersection(boolean upAvailable, boolean downAvailable,
+                            boolean leftAvailable, boolean rightAvailable) {}
+
+    public int getCellX() {
+        return (int)(getX() / GameMap.getTileWidth());
+    }
+
+    public int getCellY() {
+        return (int)(getY() / GameMap.getTileHeight());
     }
 }

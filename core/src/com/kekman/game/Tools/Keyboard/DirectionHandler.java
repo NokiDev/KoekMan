@@ -20,11 +20,11 @@ public class DirectionHandler {
         public Ternary onUnknown() {return new Ternary(Ternary.UNKNOWN);};
     }
 
-    final static public int UP =        0;
-    final static public int DOWN =      1;
-    final static public int LEFT =      2;
-    final static public int RIGHT =     3;
-    final static public int UNKNOWN =   4;
+    final static public int UP =        Input.Keys.UP;
+    final static public int DOWN =      Input.Keys.DOWN;
+    final static public int LEFT =      Input.Keys.LEFT;
+    final static public int RIGHT =     Input.Keys.RIGHT;
+    final static public int UNKNOWN =   Input.Keys.UNKNOWN;
 
     private IDirectionListener    mDirectionListener;
 
@@ -57,14 +57,21 @@ public class DirectionHandler {
         if (mDirectionListener == null) {
             System.out.println("Can't apply direction without listener");
         }
+        if (!keyboard.isActive())
+            return new Ternary(Ternary.UNKNOWN);
+        System.out.println("NEW KEY");
         switch (keyboard.getLastKey()) {
             case (Input.Keys.UP):
+                keyboard.keyUp(Input.Keys.UP);
                 return mDirectionListener.onUp();
             case (Input.Keys.DOWN):
+                keyboard.keyUp(Input.Keys.DOWN);
                 return mDirectionListener.onDown();
             case (Input.Keys.LEFT):
+                keyboard.keyUp(Input.Keys.LEFT);
                 return mDirectionListener.onLeft();
             case (Input.Keys.RIGHT):
+                keyboard.keyUp(Input.Keys.RIGHT);
                 return mDirectionListener.onRight();
             case (Input.Keys.UNKNOWN):
                 return mDirectionListener.onUnknown();

@@ -11,8 +11,9 @@ import com.badlogic.gdx.math.Vector2;
  * Created by elytum on 06/03/2017.
  */
 
-public class Keyboard implements InputProcessor {
-    private int mLastKey = Input.Keys.UNKNOWN;
+public class Keyboard extends GestureDetector.GestureAdapter implements InputProcessor {
+    private int         mLastKey = Input.Keys.UNKNOWN;
+    private boolean     mActiveKey = false;
 
     private boolean dragging = false;
     private int dragStartX = 0;
@@ -20,24 +21,23 @@ public class Keyboard implements InputProcessor {
 
 
     public void setInputProcessor() {
-        //Gdx.input.setInputProcessor(new GestureDetector(20, 0.5f, 2, 0.15f,this));
         Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public boolean keyDown(int keycode) {
+        mActiveKey = true;
         mLastKey = keycode;
         return false;
     }
 
-    private int getKeycode() {
-        return mLastKey;
-    }
+    private int getKeycode() {return mLastKey;}
+    public boolean isActive() {return mActiveKey;}
 
     @Override
     public boolean keyUp(int keycode) {
-        //if (mLastKey == keycode)
-            //mLastKey = Input.Keys.UNKNOWN;
+        if (mLastKey == keycode)
+            mActiveKey = false;
         return false;
     }
 
