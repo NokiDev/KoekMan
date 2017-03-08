@@ -48,24 +48,14 @@ public class MovingEntity extends Entity {
         if (onCenter) {
             float remainingDistance = (float)Math.sqrt(x * x + y * y);
             boolean up = canGoUp(remainingDistance);
-            boolean down = canGoUp(remainingDistance);
-            boolean left = canGoUp(remainingDistance);
-            boolean right = canGoUp(remainingDistance);
+            boolean down = canGoDown(remainingDistance);
+            boolean left = canGoLeft(remainingDistance);
+            boolean right = canGoRight(remainingDistance);
 
-            if (y > 0)
-                down = false;
-            else if (y < 0)
-                up = false;
-            if (x > 0)
-                left = false;
-            else if (x < 0)
-                right = false;
-//            if (this instanceof Pinky) {
-//                System.out.println("HELLO");
-//            }
             if ((!upWasAvailable && up) || (!downWasAvailable && down) ||
-                    (!leftWasAvailable && left) || (!rightWasAvailable && right))
+                    (!leftWasAvailable && left) || (!rightWasAvailable && right)) {
                 onIntersection(up, down, left, right, mDirection);
+            }
             upWasAvailable = up;
             downWasAvailable = down;
             leftWasAvailable = left;

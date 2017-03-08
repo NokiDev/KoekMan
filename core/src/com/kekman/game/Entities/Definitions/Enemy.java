@@ -2,7 +2,6 @@ package com.kekman.game.Entities.Definitions;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.kekman.game.Entities.LibgdxExtended.Stage;
-import com.kekman.game.Entities.Pinky;
 import com.kekman.game.Tools.Keyboard.DirectionHandler;
 import com.kekman.game.Tools.Random.RandomUtils;
 
@@ -31,9 +30,9 @@ public class Enemy extends MovingEntity {
 
     protected void changeNewRandomDirection(boolean upAvailable, boolean downAvailable,
                                             boolean leftAvailable, boolean rightAvailable, int direction) {
-        if (this instanceof Pinky) {
-            System.out.println("Remove "+DirectionHandler.getDirectionName(direction));
-        }
+//        if (this instanceof Pinky) {
+//            System.out.println("Remove "+DirectionHandler.getDirectionName(direction));
+//        }
         switch (direction) {
             case DirectionHandler.UP:
                 downAvailable = false;
@@ -56,14 +55,13 @@ public class Enemy extends MovingEntity {
     @Override
     public void onCollision(boolean upAvailable, boolean downAvailable,
                                boolean leftAvailable, boolean rightAvailable, int direction) {
-//        changeNewRandomDirection(upAvailable, downAvailable, leftAvailable, rightAvailable, direction);
     }
 
     @Override
     public void onIntersection(boolean upAvailable, boolean downAvailable,
                                boolean leftAvailable, boolean rightAvailable, int direction) {
-        if (this instanceof Pinky)
-            System.out.println("Received intersection !");
+//        if (this instanceof Pinky)
+//            System.out.println("Received intersection !");
         changeNewRandomDirection(upAvailable, downAvailable, leftAvailable, rightAvailable, direction);
     }
 }
