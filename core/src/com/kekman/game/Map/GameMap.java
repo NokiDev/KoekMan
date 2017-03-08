@@ -10,13 +10,17 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kekman.game.Entities.Ball;
+import com.kekman.game.Entities.Blinky;
 import com.kekman.game.Entities.CT;
+import com.kekman.game.Entities.Clyde;
 import com.kekman.game.Entities.Definitions.Bonus;
 import com.kekman.game.Entities.Definitions.Enemy;
 import com.kekman.game.Entities.Definitions.Entity;
 import com.kekman.game.Entities.Definitions.Required;
+import com.kekman.game.Entities.Inky;
 import com.kekman.game.Entities.LibgdxExtended.Stage;
 import com.kekman.game.Entities.Pacman;
+import com.kekman.game.Entities.Pinky;
 import com.kekman.game.Tools.Random.RandomUtils;
 import com.kekman.game.Tools.Renderers.TextureMapObjectRenderer;
 import com.kekman.game.Tools.Score.Logic;
@@ -205,10 +209,10 @@ public class GameMap extends Stage {
         mLayer = (TiledMapTileLayer)mTiledMap.getLayers().get(0);
         mPacman = new Pacman(mManager.get("sprites.txt", TextureAtlas.class), 11, 11);
         addEntity(mPacman);
-//        addEntity(new Pinky(mManager.get("sprites.txt", TextureAtlas.class), 21, 1));
-//        addEntity(new Blinky(mManager.get("sprites.txt", TextureAtlas.class), 1, 1));
-//        addEntity(new Clyde(mManager.get("sprites.txt", TextureAtlas.class), 1, 21));
-//        addEntity(new Inky(mManager.get("sprites.txt", TextureAtlas.class), 21, 21));
+        addEntity(new Pinky(mManager.get("sprites.txt", TextureAtlas.class), 21, 1));
+        addEntity(new Blinky(mManager.get("sprites.txt", TextureAtlas.class), 1, 1));
+        addEntity(new Clyde(mManager.get("sprites.txt", TextureAtlas.class), 1, 21));
+        addEntity(new Inky(mManager.get("sprites.txt", TextureAtlas.class), 21, 21));
         fillWithDots();
     }
 
@@ -247,7 +251,7 @@ public class GameMap extends Stage {
         timeSinceLastEvent += delta;
         while (timeSinceLastEvent > 1) {
             --timeSinceLastEvent;
-            if (RandomUtils.randInt(1) == 0)
+            if (RandomUtils.randInt(10) == 0)
                 spawnRandomBonus();
         }
     }
