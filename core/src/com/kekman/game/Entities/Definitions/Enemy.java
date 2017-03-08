@@ -2,6 +2,7 @@ package com.kekman.game.Entities.Definitions;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.kekman.game.Entities.LibgdxExtended.Stage;
+import com.kekman.game.Map.GameMap;
 import com.kekman.game.Tools.Keyboard.DirectionHandler;
 import com.kekman.game.Tools.Random.RandomUtils;
 
@@ -9,7 +10,7 @@ import com.kekman.game.Tools.Random.RandomUtils;
  * Created by elytum on 07/03/2017.
  */
 
-public class Enemy extends MovingEntity {
+public class Enemy extends LivingEntity {
     protected Enemy(final String name, final TextureAtlas atlas, int tileX, int tileY) {super(name,atlas, tileX, tileY);}
     public void actorAdded(final Stage stage) {setZIndex(ENEMY_ZINDEX);}
 
@@ -30,9 +31,6 @@ public class Enemy extends MovingEntity {
 
     protected void changeNewRandomDirection(boolean upAvailable, boolean downAvailable,
                                             boolean leftAvailable, boolean rightAvailable, int direction) {
-//        if (this instanceof Pinky) {
-//            System.out.println("Remove "+DirectionHandler.getDirectionName(direction));
-//        }
         switch (direction) {
             case DirectionHandler.UP:
                 downAvailable = false;
@@ -60,8 +58,12 @@ public class Enemy extends MovingEntity {
     @Override
     public void onIntersection(boolean upAvailable, boolean downAvailable,
                                boolean leftAvailable, boolean rightAvailable, int direction) {
-//        if (this instanceof Pinky)
-//            System.out.println("Received intersection !");
         changeNewRandomDirection(upAvailable, downAvailable, leftAvailable, rightAvailable, direction);
+    }
+
+    @Override
+    protected void onDie() {
+        remove();
+        GameMap.removeEntity(this);
     }
 }

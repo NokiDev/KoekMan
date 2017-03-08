@@ -10,4 +10,8 @@ import com.kekman.game.Entities.LibgdxExtended.Stage;
 public class Bonus extends StaticEntity {
     protected Bonus(final String name, final TextureAtlas atlas, int tileX, int tileY) {super(name,atlas, tileX, tileY);}
     public void actorAdded(final Stage stage) {setZIndex(BONUS_ZINDEX);}
+
+    public void applyBonus(final Entity entity) {
+
+    }
 }

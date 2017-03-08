@@ -1,5 +1,6 @@
 package com.kekman.game.Entities.Definitions;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.kekman.game.Entities.LibgdxExtended.Actor;
@@ -30,7 +31,8 @@ public class Entity extends Actor {
     public String   toString() {return super.toString()+" -> "+mAnimations;}
     protected void  setAtlas(final TextureAtlas atlas) {mAnimations = new Animations(atlas, getName());}
     protected void  setAnimation(final String animation) {mAnimations.setAnimation(animation);}
-    public void     onCollision(final Entity collider) {}
+    protected void  setAnimation(final String animation, final boolean reset) {mAnimations.setAnimation(animation, reset);}
+    protected void  setPlaymode(final String animationName, final Animation.PlayMode playmode) {mAnimations.setPlaymode(animationName, playmode);}
 
     @Override protected void	positionChanged() {super.positionChanged(); mAnimations.setPosition(getX(), getY());}
     @Override protected void	sizeChanged() {super.sizeChanged(); mAnimations.setSize(getWidth(), getHeight());}
@@ -55,5 +57,10 @@ public class Entity extends Actor {
         float offsetX = (width - getWidth()) / 2;
         float offsetY = (height - getHeight()) / 2;
         setPosition(x * width + offsetX, y * height + offsetY);
+    }
+
+    public void     onCollision(final Entity collider) {
+        if (collider instanceof Bonus)
+            ((Bonus) collider).applyBonus(this);
     }
 }

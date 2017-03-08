@@ -17,7 +17,9 @@ public class MovingEntity extends Entity {
 
     private int         mDirection = DirectionHandler.UP;
     private int         mNextDirection = DirectionHandler.UNKNOWN;
-    private int         mSpeed = 100;
+    private float       mSpeed = 100;
+
+    protected void setSpeed(float speed) {mSpeed = speed;}
 
     boolean upWasAvailable = false;
     boolean downWasAvailable = false;

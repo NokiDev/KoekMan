@@ -48,7 +48,10 @@ public class Animations extends Sprite implements IAnimation {
             String                  name = entry.getKey();
             Array<TextureRegion>    region = entry.getValue();
 
-            mAnimationsArray.put(name, new Animation<TextureRegion>(.1f, region, Animation.PlayMode.LOOP_PINGPONG));
+            if (name.equals("die"))
+                mAnimationsArray.put(name, new Animation<TextureRegion>(.1f, region, Animation.PlayMode.NORMAL));
+            else
+                mAnimationsArray.put(name, new Animation<TextureRegion>(.1f, region, Animation.PlayMode.LOOP_PINGPONG));
         }
     }
 
@@ -78,5 +81,15 @@ public class Animations extends Sprite implements IAnimation {
             return;
         }
         batch.draw(animation.getKeyFrame(mStateTime), getX(), getY(), getWidth(), getHeight());
+    }
+
+    public void setPlaymode(final String animationName, final Animation.PlayMode playmode) {
+        Animation<TextureRegion> animation = mAnimationsArray.get(mAnimation);
+        if (animation == null) {
+            System.out.println("Unknown animation "+animationName+", can't set playmode");
+            return;
+        }
+        System.out.println("UPDATING");
+        animation.setPlayMode(playmode);
     }
 }

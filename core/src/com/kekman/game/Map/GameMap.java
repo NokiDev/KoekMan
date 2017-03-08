@@ -59,6 +59,12 @@ public class GameMap extends Stage {
         return instance.mEntities;
     }
 
+    public static void removeEntity(final Entity entity) {
+        if (instance == null)
+            return;
+        instance.mEntities.removeValue(entity, true);
+    }
+
     public static float getTileWidth() {
         if (instance == null)
             return 0;
@@ -151,10 +157,10 @@ public class GameMap extends Stage {
         mLayer = (TiledMapTileLayer)mTiledMap.getLayers().get(0);
 
         mPacman = new Pacman(mManager.get("sprites.txt", TextureAtlas.class), 1, 1);
-        mPinky = new Pinky(mManager.get("sprites.txt", TextureAtlas.class), 1, 1);
-        mBlinky = new Blinky(mManager.get("sprites.txt", TextureAtlas.class), 1, 1);
-        mClyde = new Clyde(mManager.get("sprites.txt", TextureAtlas.class), 1, 1);
-        mInky = new Inky(mManager.get("sprites.txt", TextureAtlas.class), 1, 1);
+        mPinky = new Pinky(mManager.get("sprites.txt", TextureAtlas.class), 10, 1);
+        mBlinky = new Blinky(mManager.get("sprites.txt", TextureAtlas.class), 10, 1);
+        mClyde = new Clyde(mManager.get("sprites.txt", TextureAtlas.class), 10, 1);
+        mInky = new Inky(mManager.get("sprites.txt", TextureAtlas.class), 10, 1);
         mEntities.add(mPacman);
         mEntities.add(mPinky);
         mEntities.add(mBlinky);
