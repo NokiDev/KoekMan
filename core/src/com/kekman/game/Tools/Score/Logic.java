@@ -8,4 +8,7 @@ public class Logic {
     public static void loose() {
         System.out.println("You lost !");
     }
+    public static void win() {
+        System.out.println("You won !");
+    }
 }

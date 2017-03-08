@@ -10,18 +10,16 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kekman.game.Entities.Ball;
-import com.kekman.game.Entities.Blinky;
 import com.kekman.game.Entities.CT;
-import com.kekman.game.Entities.Clyde;
 import com.kekman.game.Entities.Definitions.Bonus;
 import com.kekman.game.Entities.Definitions.Enemy;
 import com.kekman.game.Entities.Definitions.Entity;
-import com.kekman.game.Entities.Inky;
+import com.kekman.game.Entities.Definitions.Required;
 import com.kekman.game.Entities.LibgdxExtended.Stage;
 import com.kekman.game.Entities.Pacman;
-import com.kekman.game.Entities.Pinky;
 import com.kekman.game.Tools.Random.RandomUtils;
 import com.kekman.game.Tools.Renderers.TextureMapObjectRenderer;
+import com.kekman.game.Tools.Score.Logic;
 import com.kekman.game.Tools.Tilemap.TilemapUtils;
 
 /**
@@ -39,11 +37,11 @@ public class GameMap extends Stage {
 
     private Array<Entity>               mEntities = new Array<Entity>();
     private Pacman                      mPacman;
-    private Blinky                      mBlinky;
-    private Inky                        mInky;
-    private Pinky                       mPinky;
-    private Clyde                       mClyde;
-    private Ball[]                      mballs;
+//    private Blinky                      mBlinky;
+//    private Inky                        mInky;
+//    private Pinky                       mPinky;
+//    private Clyde                       mClyde;
+//    private Ball[]                      mballs;
 
     private TiledMapRenderer tiledMapRenderer;
 
@@ -52,9 +50,10 @@ public class GameMap extends Stage {
             return;
         for (int i=0; i < instance.mEntities.size; i++) {
             final Entity entity = instance.mEntities.get(i);
-//            if (entity instanceof Enemy)
-//                ((Enemy) entity).setWeak(weak);
+            if (entity instanceof Required)
+                return;
         }
+        Logic.win();
     }
 
     public static GameMap getInstance() {
@@ -121,7 +120,7 @@ public class GameMap extends Stage {
             int posY = tileY - 1;
             for (float h = height; h > 0; h -= tileHeight) {
                 ++posY;
-                if (posY < 0)
+                if (posY < 0 || posY >= colliders.length || posX >= colliders[posY].length)
                     continue;
                 if (colliders[posY][posX])
                     return true;
@@ -206,10 +205,10 @@ public class GameMap extends Stage {
         mLayer = (TiledMapTileLayer)mTiledMap.getLayers().get(0);
         mPacman = new Pacman(mManager.get("sprites.txt", TextureAtlas.class), 11, 11);
         addEntity(mPacman);
-        addEntity(new Pinky(mManager.get("sprites.txt", TextureAtlas.class), 21, 1));
-        addEntity(new Blinky(mManager.get("sprites.txt", TextureAtlas.class), 1, 1));
-        addEntity(new Clyde(mManager.get("sprites.txt", TextureAtlas.class), 1, 21));
-        addEntity(new Inky(mManager.get("sprites.txt", TextureAtlas.class), 21, 21));
+//        addEntity(new Pinky(mManager.get("sprites.txt", TextureAtlas.class), 21, 1));
+//        addEntity(new Blinky(mManager.get("sprites.txt", TextureAtlas.class), 1, 1));
+//        addEntity(new Clyde(mManager.get("sprites.txt", TextureAtlas.class), 1, 21));
+//        addEntity(new Inky(mManager.get("sprites.txt", TextureAtlas.class), 21, 21));
         fillWithDots();
     }
 
