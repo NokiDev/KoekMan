@@ -59,7 +59,6 @@ public class DirectionHandler {
         }
         if (!keyboard.isActive())
             return new Ternary(Ternary.UNKNOWN);
-        System.out.println("NEW KEY");
         switch (keyboard.getLastKey()) {
             case (Input.Keys.UP):
                 keyboard.keyUp(Input.Keys.UP);

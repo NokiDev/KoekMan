@@ -33,4 +33,10 @@ public class Player extends MovingEntity {
                             boolean leftAvailable, boolean rightAvailable) {
         System.out.println("Collision: "+upAvailable+" "+downAvailable+" "+leftAvailable+" "+rightAvailable);
     }
+
+    @Override
+    protected void positionChanged() {
+        super.positionChanged();
+//        System.out.println("Changed position to "+getX()+" "+getY());
+    }
 }

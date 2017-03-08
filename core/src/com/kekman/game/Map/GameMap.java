@@ -71,6 +71,43 @@ public class GameMap extends Stage {
         return TilemapUtils.getTileHeight(instance.mTiledMap);
     }
 
+    public static boolean isColliding(int cellX, int cellY) {
+        if (instance == null)
+            return false;
+        return !instance.mMapColliders[cellY][cellX];
+    }
+
+    public static boolean isColliding(final Entity entity) {
+        if (instance == null)
+            return false;
+        boolean colliders[][] = instance.mMapColliders;
+
+        float tileWidth = getTileWidth();
+        float tileHeight = getTileHeight();
+        float x = entity.getX();
+        int   tileX = (int)(x / tileWidth);
+        float y = entity.getY();
+        int   tileY = (int)(y / tileHeight);
+        float width = entity.getWidth() + (x % tileWidth);
+        float height = entity.getHeight() + (y % tileHeight);
+
+        int posX = tileX - 1;
+        for (float w = width; w > 0; w -= tileWidth) {
+            ++posX;
+            if (posX < 0)
+                continue;
+            int posY = tileY - 1;
+            for (float h = height; h > 0; h -= tileHeight) {
+                ++posY;
+                if (posY < 0)
+                    continue;
+                if (colliders[posY][posX])
+                    return true;
+            }
+        }
+        return false;
+    }
+
     public GameMap(final AssetManager manager, final Viewport viewport) {
         super(viewport);
         instance = this;
@@ -124,10 +161,10 @@ public class GameMap extends Stage {
         mEntities.add(mClyde);
         mEntities.add(mInky);
         addActor(mPacman);
-        addActor(mPinky);
-        addActor(mBlinky);
-        addActor(mClyde);
-        addActor(mInky);
+//        addActor(mPinky);
+//        addActor(mBlinky);
+//        addActor(mClyde);
+//        addActor(mInky);
     }
 
     public int[] randomEmptyCell() {
@@ -159,7 +196,7 @@ public class GameMap extends Stage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (RandomUtils.randInt(50) == 0)
+        if (RandomUtils.randInt(5000) == 0)
             spawnRandomBonus();
     }
 

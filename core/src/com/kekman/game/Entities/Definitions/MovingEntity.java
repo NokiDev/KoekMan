@@ -1,10 +1,8 @@
 package com.kekman.game.Entities.Definitions;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.kekman.game.KekMan;
 import com.kekman.game.Map.GameMap;
-import com.kekman.game.Tools.CollisionDetector.CollisionDetector;
 import com.kekman.game.Tools.Keyboard.DirectionHandler;
 
 /**
@@ -21,45 +19,98 @@ public class MovingEntity extends Entity {
     private int         mNextDirection = DirectionHandler.UNKNOWN;
     private int         mSpeed = 100;
 
+    private void moveEntity(float x, float y) {
+        if (this instanceof Player) {
+            float tileWidth = GameMap.getTileWidth();
+            float tileHeight = GameMap.getTileHeight();
 
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-        final TiledMap tiledMap = GameMap.getTilesMap();
-        if (tiledMap != null &&
-                (mDirection != DirectionHandler.UNKNOWN ||
-                        mNextDirection != DirectionHandler.UNKNOWN)) {
-            if (mDirection == DirectionHandler.UNKNOWN)
-                mDirection = mNextDirection;
-            if (canGoDirection(tiledMap, mNextDirection, mSpeed * delta)) {
-                changeDirection(mNextDirection);
-                mNextDirection = DirectionHandler.UNKNOWN;
+            float posX = (getX() % tileWidth);
+            float nextPosX = posX + x;
+            float posY = (getY() % tileHeight);
+            float nextPosY = posY + y;
+
+            boolean onCenter = false;
+            if (posX < tileWidth != nextPosX < tileWidth) {
+                float offset = tileWidth - posX;
+                setX(getX() + offset);
+                x -= offset;
+                onCenter = true;
             }
-            else if (!canGoDirection(tiledMap, mDirection, mSpeed * delta)) {
-                changeDirection(DirectionHandler.UNKNOWN);
-                mNextDirection = DirectionHandler.UNKNOWN;
-                final TiledMap map = GameMap.getTilesMap();
-                if (map != null) {
-                    if (this instanceof Player)
-                        System.out.println("Position of collision: ("+getCellX()+", "+getCellY()+")");
-                    setCell(getCellX(), getCellY());
-//                    onCollision(canGoUp(map, mSpeed * delta), canGoDown(map, mSpeed * delta),
-//                            canGoLeft(map, mSpeed * delta), canGoRight(map, mSpeed * delta));
-                }
+            if (posY < tileHeight != nextPosY < tileHeight) {
+                float offset = tileHeight - posY;
+                setY(getY() + offset);
+                y -= offset;
+                onCenter = true;
+            }
+
+//            if (posX < tileWidth && nextPosX > tileWidth) {
+//                float offset = tileWidth - posX;
+//                setX(getX() + offset);
+//                x -= offset;
+//                onCenter = true;
+//            } else if (posX > tileWidth && nextPosX < tileWidth) {
+//                float offset = tileWidth - posX;
+//                setX(getX() + offset);
+//                x -= offset;
+//                onCenter = true;
+//            }
+//            if (posY < tileHeight && nextPosY > tileHeight) {
+//                float offset = tileHeight - posY;
+//                setY(getY() + offset);
+//                y -= offset;
+//                onCenter = true;
+//            } else if (posY > tileHeight && nextPosY < tileHeight) {
+//                float offset = tileHeight - posY;
+//                setY(getY() + offset);
+//                y -= offset;
+//                onCenter = true;
+//            }
+            if (onCenter) {
+                float remainingDistance = (float)Math.sqrt(x * x + y * y);
+                boolean up = canGoUp(remainingDistance);
+                boolean down = canGoUp(remainingDistance);
+                boolean left = canGoUp(remainingDistance);
+                boolean right = canGoUp(remainingDistance);
+                if (up || down || left || right)
+                    onIntersection(up, down, left, right);
             }
         }
+//        if (this instanceof Player) {
+//            System.out.println("moveby "+x+" "+y);
+//        }
+        moveBy(x, y);
+    }
+
+    public static String getDirectionName(int direction) {
+        switch (direction) {
+            case DirectionHandler.UP:
+                return "UP";
+            case DirectionHandler.DOWN:
+                return "DOWN";
+            case DirectionHandler.LEFT:
+                return "LEFT";
+            case DirectionHandler.RIGHT:
+                return "RIGHT";
+            case DirectionHandler.UNKNOWN:
+                return "UNKNOWN";
+            default:
+                return "default";
+        }
+    }
+
+    private void applyDirection(float speed) {
         switch (mDirection) {
             case DirectionHandler.UP:
-                moveBy(0, mSpeed * delta);
+                moveEntity(0, speed);
                 break;
             case DirectionHandler.DOWN:
-                moveBy(0, -mSpeed * delta);
+                moveEntity(0, -speed);
                 break;
             case DirectionHandler.LEFT:
-                moveBy(-mSpeed * delta, 0);
+                moveEntity(-speed, 0);
                 break;
             case DirectionHandler.RIGHT:
-                moveBy(mSpeed * delta, 0);
+                moveEntity(speed, 0);
                 break;
             default:
                 break;
@@ -74,6 +125,27 @@ public class MovingEntity extends Entity {
             setY(getY() - KekMan.WORLD_HEIGHT);
         else if (getY() - getHeight() / 2 < 0)
             setY(getY() + KekMan.WORLD_HEIGHT);
+    }
+
+    private float mLastDelta;
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if (mDirection != DirectionHandler.UNKNOWN || mNextDirection != DirectionHandler.UNKNOWN) {
+            if (canGoDirection(mNextDirection, mSpeed * delta)) {
+                changeDirection(mNextDirection);
+                mNextDirection = DirectionHandler.UNKNOWN;
+            }
+            else if (!canGoDirection(mDirection, mSpeed * delta)) {
+                setCell(getCellX(), getCellY());
+                changeDirection(mNextDirection);
+                mNextDirection = DirectionHandler.UNKNOWN;
+                onCollision(canGoUp(mSpeed * delta), canGoDown(mSpeed * delta),
+                        canGoLeft(mSpeed * delta), canGoRight(mSpeed * delta));
+            }
+        }
+        applyDirection(mSpeed * delta);
+        mLastDelta = delta;
     }
 
     protected void directionChanged() {
@@ -101,89 +173,117 @@ public class MovingEntity extends Entity {
     private void changeDirection(final int direction) {
         if (mDirection == direction)
             return;
+        if (direction != DirectionHandler.UNKNOWN &&
+                !canGoDirection(direction, mSpeed * mLastDelta))
+            return;
         mDirection = direction;
         directionChanged();
     }
 
-    private boolean canGo(final TiledMap map, float moveX, float moveY) {
-        moveBy(moveX, moveY);
-        Object hit = CollisionDetector.checkCollision(map, this);
-        moveBy(-moveX, -moveY);
-        return hit == null;
+    private boolean canGo(float moveX, float moveY) {
+        float x = getX();
+        float y = getY();
+        setPosition(x + moveX, y + moveY);
+        boolean colliding = GameMap.isColliding(this);
+        setPosition(x, y);
+        return !colliding;
     }
 
-    public boolean canGoUp(final TiledMap map, float speed) {
-        return canGo(map, 0, speed);
+    public boolean canGoUp(float speed) {
+        return canGo(0, speed);
     }
 
-    public boolean canGoDown(final TiledMap map, float speed) {
-        return canGo(map, 0, -speed);
+    public boolean canGoDown(float speed) {
+        return canGo(0, -speed);
     }
 
-    public boolean canGoLeft(final TiledMap map, float speed) {
-        return canGo(map, -speed, 0);
+    public boolean canGoLeft(float speed) {
+        return canGo(-speed, 0);
     }
 
-    public boolean canGoRight(final TiledMap map, float speed) {
-        return canGo(map, speed, 0);
+    public boolean canGoRight(float speed) {
+        return canGo(speed, 0);
     }
 
-    public boolean canGoDirection(final TiledMap map, int direction, float speed) {
+    public boolean canGoDirection(int direction, float speed) {
         switch (direction) {
             case DirectionHandler.UP:
-                return canGoUp(map, speed);
+                return canGoUp(speed);
             case DirectionHandler.DOWN:
-                return canGoDown(map, speed);
+                return canGoDown(speed);
             case DirectionHandler.LEFT:
-                return canGoLeft(map, speed);
+                return canGoLeft(speed);
             case DirectionHandler.RIGHT:
-                return canGoRight(map, speed);
+                return canGoRight(speed);
             default:
                 return false;
         }
     }
 
     public boolean setDirectionUp() {
-        final TiledMap map = GameMap.getTilesMap();
-        if (map != null && !canGoUp(map, mSpeed))
-            mNextDirection = DirectionHandler.UP;
-        else
+        if (canGoUp(mSpeed * mLastDelta)) {
             changeDirection(DirectionHandler.UP);
-        return true;
+            return true;
+        } else {
+            mNextDirection = DirectionHandler.UP;
+            return false;
+        }
     }
 
     public boolean setDirectionDown() {
-        final TiledMap map = GameMap.getTilesMap();
-        if (map != null && !canGoDown(map, mSpeed))
-            mNextDirection = DirectionHandler.DOWN;
-        else
+        if (canGoDown(mSpeed * mLastDelta)) {
             changeDirection(DirectionHandler.DOWN);
-        return true;
+            return true;
+        } else {
+            mNextDirection = DirectionHandler.DOWN;
+            return false;
+        }
     }
 
     public boolean setDirectionLeft() {
-        final TiledMap map = GameMap.getTilesMap();
-        if (map != null && !canGoLeft(map, mSpeed))
-            mNextDirection = DirectionHandler.LEFT;
-        else
+        if (canGoLeft(mSpeed * mLastDelta)) {
             changeDirection(DirectionHandler.LEFT);
-        return true;
+            return true;
+        } else {
+            mNextDirection = DirectionHandler.LEFT;
+            return false;
+        }
     }
 
     public boolean setDirectionRight() {
-        final TiledMap map = GameMap.getTilesMap();
-        if (map != null && !canGoRight(map, mSpeed))
-            mNextDirection = DirectionHandler.RIGHT;
-        else
+        if (canGoRight(mSpeed * mLastDelta)) {
             changeDirection(DirectionHandler.RIGHT);
-        return true;
+            return true;
+        } else {
+            mNextDirection = DirectionHandler.RIGHT;
+            return false;
+        }
     }
 
     public void onCollision(boolean upAvailable, boolean downAvailable,
                             boolean leftAvailable, boolean rightAvailable) {}
 
     public void onIntersection(boolean upAvailable, boolean downAvailable,
-                            boolean leftAvailable, boolean rightAvailable) {}
+                            boolean leftAvailable, boolean rightAvailable) {
+        switch (mNextDirection) {
+            case DirectionHandler.UP:
+                if (upAvailable)
+                    changeDirection(DirectionHandler.UP);
+                break;
+            case DirectionHandler.DOWN:
+                if (downAvailable)
+                    changeDirection(DirectionHandler.DOWN);
+                break;
+            case DirectionHandler.LEFT:
+                if (leftAvailable)
+                    changeDirection(DirectionHandler.LEFT);
+                break;
+            case DirectionHandler.RIGHT:
+                if (rightAvailable)
+                    changeDirection(DirectionHandler.RIGHT);
+                break;
+        }
+    }
 
     public int getCellX() {
         return (int)((getX() + getWidth() / 2) / GameMap.getTileWidth());

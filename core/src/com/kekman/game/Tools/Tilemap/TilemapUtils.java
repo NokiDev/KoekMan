@@ -73,11 +73,11 @@ public class TilemapUtils {
 
     public static boolean[][]   getEmptyCells(final TiledMap tiledMap) {
         boolean array[][] = new boolean[getMaxHeight(tiledMap)][getMaxWidth(tiledMap)];
-        for (boolean yArray[]: array) {
-            for (int i = 0; i < yArray.length; i++) {
-                yArray[i] = true;
-            }
-        }
+//        for (boolean yArray[]: array) {
+//            for (int i = 0; i < yArray.length; i++) {
+//                yArray[i] = true;
+//            }
+//        }
         float tileWidth = getTileWidth(tiledMap);
         float tileHeight = getTileHeight(tiledMap);
 
@@ -97,11 +97,12 @@ public class TilemapUtils {
                     int posY = tileY - 1;
                     for (float h = height; h > 0; h -= tileHeight) {
                         ++posY;
-                        array[posY][posX] = false;
+                        array[posY][posX] = true;
                     }
                 }
             }
         }
+        printBoolArrayArray(array);
         return array;
     }
 
@@ -109,17 +110,16 @@ public class TilemapUtils {
         int numberOfPossibilities = 0;
         for (boolean yArray[]: array) {
             for (boolean xValue: yArray) {
-                if (xValue)
+                if (!xValue)
                     ++numberOfPossibilities;
             }
         }
         int cell = RandomUtils.randInt(numberOfPossibilities - 1);
-        System.out.println(cell+" in "+numberOfPossibilities);
         for (int y = 0; y < array.length; y++) {
             boolean yArray[] = array[y];
             int x = 0;
             for (boolean xValue: yArray) {
-                if (xValue) {
+                if (!xValue) {
                     if (cell == 0)
                         return new int[]{x, y};
                     --cell;
