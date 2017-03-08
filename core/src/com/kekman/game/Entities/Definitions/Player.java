@@ -10,7 +10,7 @@ import com.kekman.game.Tools.CollisionDetector.CollisionDetector;
  */
 
 public class Player extends LivingEntity {
-    boolean immortal = true;
+    boolean immortal = false;
 
     protected Player(final String name, final TextureAtlas atlas, int tileX, int tileY) {
         super(name,atlas, tileX, tileY);
@@ -37,7 +37,8 @@ public class Player extends LivingEntity {
 
     @Override
     public void onDie() {
-//        setSpeed(0);
+        setSpeed(0);
         setAnimation("die", true);
+        Logic.loose();
     }
 }

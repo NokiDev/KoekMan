@@ -23,7 +23,6 @@ public class Bonus extends StaticEntity {
     public void applyBonus(final Entity entity) {
         if (entity instanceof Player) {
             Score.AddScore(mValue);
-            System.out.println("Score: "+Score.getScore());
             remove();
             GameMap.removeEntity(this);
         }

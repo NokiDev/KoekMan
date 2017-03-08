@@ -7,6 +7,11 @@ package com.kekman.game.Tools.Score;
 public class Score {
     private static int score = 0;
 
-    public static int getScore() {return score;}
-    public static void AddScore(int diff) {score += diff;}
+    public static int getScore() {
+        return score;
+    }
+    public static void AddScore(int diff) {
+        score += diff;
+        System.out.println("Score: "+Score.getScore());
+    }
 }

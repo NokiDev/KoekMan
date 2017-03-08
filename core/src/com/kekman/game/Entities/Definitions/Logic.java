@@ -1,0 +1,11 @@
+package com.kekman.game.Entities.Definitions;
+
+/**
+ * Created by elytum on 08/03/2017.
+ */
+
+public class Logic {
+    public static void loose() {
+        System.out.println("You lost !");
+    }
+}
